@@ -6,7 +6,7 @@
 #include <timer.h>
 #include <selector.h>
 
-
+// lol
 void blink_circle(unsigned int blink_time, unsigned int count);
 
 // Init function required by __libc_init_array
