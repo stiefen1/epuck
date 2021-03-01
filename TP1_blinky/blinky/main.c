@@ -14,7 +14,7 @@ void _init(void) {}
 
 int main(void)
 {
-	unsigned int blink_time = 0, count = 0, selector_position = 0;
+    unsigned int blink_time = 0, count = 0, selector_position = 0;
 
     SystemClock_Config();
 
