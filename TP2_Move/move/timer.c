@@ -3,15 +3,15 @@
 #include <main.h>
 
 #define TIMER_CLOCK         84000000    // APB1 clock
-#define PRESCALER_TIM7      8400        // timer frequency: 10kHz
-#define COUNTER_MAX_TIM7    100000       // timer max counter -> 1Hz
+//#define PRESCALER_TIM7      840        // timer frequency: 10kHz
+//#define COUNTER_MAX_TIM7    100000       // timer max counter -> 1Hz
 
-#define PRESCALER_TIM6      8400        // timer frequency: 10kHz
-#define COUNTER_MAX_TIM6    100000       // timer max counter -> 1Hz
+//#define PRESCALER_TIM6      8400        // timer frequency: 10kHz
+//#define COUNTER_MAX_TIM6    100000       // timer max counter -> 1Hz
 
 #define PRESCALER_TIM4		8400
 #define COUNTER_MAX_TIM4	100
-
+/*
 void timer7_start(void)
 {
     // Enable TIM7 clock
@@ -42,7 +42,7 @@ void timer6_start(void)
     TIM6->CR1 |= TIM_CR1_CEN;            // Enable timer
 }
 
-
+*/
 void timer4_start(void)
 {
     // Enable TIM4 clock
@@ -70,7 +70,7 @@ void set_PWM_Frequency(unsigned int ratio)
 */
 
 // // Timer 7 Interrupt Service Routine
-void TIM7_IRQHandler(void)
+/*void TIM7_IRQHandler(void)
 {
 	/*
 	*
@@ -82,9 +82,9 @@ void TIM7_IRQHandler(void)
 	*
 	*   As tested, only the workaround 3 is working well, then read back of CR must be done before leaving the ISR
 	*
-	*/
 
-//     /* do something ... */
+
+//     /* do something ...
 //     gpio_toggle(BODY_LED);
 
 //     // Clear interrupt flag
@@ -100,3 +100,4 @@ void TIM6_IRQHandler(void)
     TIM6->SR;	// Read back in order to ensure the effective IF clearing
 
 }
+*/

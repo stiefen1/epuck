@@ -34,8 +34,12 @@ int main(void)
     gpio_config_output_af_pushpull(FRONT_LED);
     timer4_start();
 
+    motor_init();
+    motor_set_position(10,10,3,3);
+
     while (1) {
-        set_PWM_Frequency(6*get_selector());
+        //set_PWM_Frequency(6*get_selector());
+
     }
 }
 
