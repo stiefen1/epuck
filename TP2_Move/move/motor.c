@@ -169,11 +169,14 @@ void motor_set_position(float position_r, float position_l, float speed_r, float
 
 void motor_set_speed(float speed_r, float speed_l)
 {
-	if(speed_r<MOTOR_SPEED_LIMIT)
-		TIM6->ARR = ceil(speed_factor/speed_r) - 1; // Speed in cm/s
+	if(speed_r>MOTOR_SPEED_LIMIT)
+		speed_r = MOTOR_SPEED_LIMIT;
 
-	if(speed_l<MOTOR_SPEED_LIMIT)
-		TIM7->ARR = ceil(speed_factor/speed_l) -1; // Speed in cm/s
+	if(speed_l>MOTOR_SPEED_LIMIT)
+		speed_l = MOTOR_SPEED_LIMIT;
+
+	TIM6->ARR = ceil(speed_factor/speed_r) - 1; // Speed in cm/s
+	TIM7->ARR = ceil(speed_factor/speed_l) -1; // Speed in cm/s
 }
 
 void MOTOR_RIGHT_IRQHandler(void)

@@ -5,6 +5,8 @@
 #include <timer.h>
 #include <motor.h>
 #include <selector.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define PI                  3.1415926536f
 //TO ADJUST IF NECESSARY. NOT ALL THE E-PUCK2 HAVE EXACTLY THE SAME WHEEL DISTANCE
@@ -35,10 +37,10 @@ int main(void)
     timer4_start();
 
     motor_init();
-    motor_set_position(10,10,3,3);
+    motor_set_position(1000,1000,5,13);
 
     while (1) {
-        //set_PWM_Frequency(6*get_selector());
+        set_PWM_Frequency(6*get_selector());
 
     }
 }

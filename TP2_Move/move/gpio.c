@@ -71,6 +71,7 @@ void gpio_toggle(GPIO_TypeDef *port, unsigned int pin)
     }
 }
 
+// ATTENTION FONCTION BOOLEENNE !
 bool gpio_read(GPIO_TypeDef *port, unsigned int pin)
 {
     return (port->IDR & (1<<pin));
