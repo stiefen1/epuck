@@ -180,17 +180,20 @@ void motor_set_speed(float speed_r, float speed_l)
 	TIM7->ARR = round(speed_factor/speed_l) -1; // Speed in cm/s
 }
 
-void curve(float speed, float radius, float distance)
+void motor_curve(float speed, float radius, float angle)
 {
-	float speed_l, speed_r, distance_r, distance_l;
+	float speed_l, speed_r, distance_r, distance_l, distance;
+
+	distance = angle * PI * radius / 180;
 
 	if(radius != 0) // Evite la division par 0
 	{
-		speed_l = abs((radius-(WHEELS_DISTANCE/2))*speed/radius);
-		speed_r = abs((radius+(WHEELS_DISTANCE/2))*speed/radius);
-		distance_l = (radius-(WHEEL_DISTANCE/2))*distance/radius;
-		distance_r = (radius+(WHEEL_DISTANCE/2))*distance/radius;
+		speed_l = abs((radius-(WHEELS_DISTANCE/2.0))*speed/radius);
+		speed_r = abs((radius+(WHEELS_DISTANCE/2.0))*speed/radius);
+		distance_l = (radius-(WHEELS_DISTANCE/2.0))*distance/radius;
+		distance_r = (radius+(WHEELS_DISTANCE/2.0))*distance/radius;
 
+		motor_set_position(distance_r, distance_l, speed_r, speed_l);
 	}
 }
 
@@ -247,7 +250,7 @@ void motor_turn(float angle, float speed)
     return;
   }
 
-  motor_set_position(distance, distance, speed, speed);
+  motor_set_position(distance, -distance, speed, speed);
 }
 
 void motor_forward(float distance, float speed)
