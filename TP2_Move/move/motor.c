@@ -13,8 +13,9 @@
 #define NSTEP_ONE_TURN      1000 // number of step for 1 turn of the motor
 #define NSTEP_ONE_EL_TURN   4  //number of steps to do 1 electrical turn
 #define NB_OF_PHASES        4  //number of phases of the motors
-#define WHEEL_PERIMETER     13 // [cm]
-#define REDUCTION_FACTOR	50 // Réducteur, facteur 50:1
+#define WHEEL_PERIMETER     13.f // [cm]
+#define REDUCTION_FACTOR	50.f // Réducteur, facteur 50:1
+#define WHEELS_DISTANCE		5.3f // Ecart entre les roues en cm
 
 //timers to use for the motors
 #define MOTOR_RIGHT_TIMER       TIM6
@@ -27,7 +28,7 @@
 #define MOTOR_LEFT_IRQ          TIM7_IRQn
 #define MOTOR_LEFT_IRQHandler   TIM7_IRQHandler
 
-#define PRESCALER			8400 // Prescaler to obtain a timer frequency of 10 kHz
+#define PRESCALER			840 // Prescaler to obtain a timer frequency of 10 kHz
 
 #define PRESCALER_TIM7      PRESCALER // timer frequency: 10kHz left motor
 #define COUNTER_MAX_TIM7    100       // timer max counter -> 100Hz
@@ -48,7 +49,7 @@
 #define MOTOR_LEFT_D	GPIOE, 10
 
 // Facteur constant utilisé pour calculer counter_max à partir de la vitesse
-const float speed_factor = (TIMER_CLOCK/PRESCALER)*WHEEL_PERIMETER/(20*REDUCTION_FACTOR);
+const float speed_factor = WHEEL_PERIMETER*TIMER_CLOCK/(PRESCALER*20.0*REDUCTION_FACTOR);
 
 static const uint8_t step_halt[NB_OF_PHASES] = {0, 0, 0, 0};
 static const uint8_t step_table[NSTEP_ONE_EL_TURN][NB_OF_PHASES] = {
@@ -162,8 +163,8 @@ void motor_set_position(float position_r, float position_l, float speed_r, float
 
 	motor_set_speed(speed_r, speed_l);
 
-	step_goal_right = ceil(position_r*NSTEP_ONE_TURN/WHEEL_PERIMETER); // Position in cm
-	step_goal_left = ceil(position_l*NSTEP_ONE_TURN/WHEEL_PERIMETER); // Position in cm
+	step_goal_right = round(position_r*NSTEP_ONE_TURN/WHEEL_PERIMETER); // Position in cm
+	step_goal_left = round(position_l*NSTEP_ONE_TURN/WHEEL_PERIMETER); // Position in cm
 }
 
 
@@ -175,8 +176,22 @@ void motor_set_speed(float speed_r, float speed_l)
 	if(speed_l>MOTOR_SPEED_LIMIT)
 		speed_l = MOTOR_SPEED_LIMIT;
 
-	TIM6->ARR = ceil(speed_factor/speed_r) - 1; // Speed in cm/s
-	TIM7->ARR = ceil(speed_factor/speed_l) -1; // Speed in cm/s
+	TIM6->ARR = round(speed_factor/speed_r) - 1; // Speed in cm/s
+	TIM7->ARR = round(speed_factor/speed_l) -1; // Speed in cm/s
+}
+
+void curve(float speed, float radius, float distance)
+{
+	float speed_l, speed_r, distance_r, distance_l;
+
+	if(radius != 0) // Evite la division par 0
+	{
+		speed_l = abs((radius-(WHEELS_DISTANCE/2))*speed/radius);
+		speed_r = abs((radius+(WHEELS_DISTANCE/2))*speed/radius);
+		distance_l = (radius-(WHEEL_DISTANCE/2))*distance/radius;
+		distance_r = (radius+(WHEEL_DISTANCE/2))*distance/radius;
+
+	}
 }
 
 void MOTOR_RIGHT_IRQHandler(void)
