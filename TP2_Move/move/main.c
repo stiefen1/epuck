@@ -37,7 +37,7 @@ int main(void)
     timer4_start();
 
     motor_init();
-    motor_set_position(1000,1000,5,13);
+    motor_set_position(469.2,500,12.2,13);
 
     while (1) {
         set_PWM_Frequency(6*get_selector());
