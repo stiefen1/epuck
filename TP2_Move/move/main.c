@@ -27,17 +27,21 @@ void delay(unsigned int n)
 
 int main(void)
 {
+    delay(10000000);
     SystemClock_Config();
 
     // Enable GPIOD and GPIOE peripheral clock
     RCC->AHB1ENR    |= RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIODEN;
+
 
     init_selector();
     gpio_config_output_af_pushpull(FRONT_LED);
     timer4_start();
 
     motor_init();
-    motor_set_position(469.2,500,12.2,13);
+    //motor_set_position(469.2,500,12.2,13);
+
+    motor_curve(12, 20, 90);
 
     while (1) {
         set_PWM_Frequency(6*get_selector());
