@@ -33,19 +33,61 @@ int main(void)
     // Enable GPIOD and GPIOE peripheral clock
     RCC->AHB1ENR    |= RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIODEN;
 
+    int sylvain = 0;
 
     init_selector();
     gpio_config_output_af_pushpull(FRONT_LED);
     timer4_start();
 
     motor_init();
-    //motor_set_position(469.2,500,12.2,13);
-
-    motor_curve(12, 20, 90);
 
     while (1) {
-        set_PWM_Frequency(6*get_selector());
+        //if(isFinished())
+        	//set_PWM_Frequency(6*get_selector());
 
+    	if(isFinished())
+    	{
+    		switch(sylvain)
+    		{
+    			case 0:
+    				motor_forward(20, 13);
+    			break;
+
+    			case 1:
+    				motor_turn(270, 13);
+    			break;
+
+    			case 2:
+    				motor_forward(-20,13);
+    			break;
+
+    			case 3:
+    				motor_turn(-90, 13);
+    			break;
+
+    			case 4:
+    				motor_forward(10, 13);
+    			break;
+
+    			case 5:
+    				motor_curve(10,50,90);
+    			break;
+
+    			case 6:
+    				motor_forward(10, 13);
+    			break;
+
+    			case 7:
+    				motor_turn(90, 13);
+    			break;
+
+    			default:
+    				sylvain = -1;
+    			break;
+    		}
+
+    		sylvain++;
+    	}
     }
 }
 

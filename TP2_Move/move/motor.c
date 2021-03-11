@@ -150,12 +150,21 @@ void motor_stop(void)
 	left_motor_update(step_halt);
 
 	// Remise à zéro des goals & compteurs
-	step_goal_right = 0;
-	step_goal_left = 0;
-	step_count_right = 0;
-	step_count_left = 0;
+	motor_reset_right();
+	motor_reset_left();
 }
 
+void motor_reset_right()
+{
+	step_count_right = 0;
+	step_goal_right = 0;
+}
+
+void motor_reset_left()
+{
+	step_count_left = 0;
+	step_goal_left = 0;
+}
 
 void motor_set_position(float position_r, float position_l, float speed_r, float speed_l)
 {
@@ -182,18 +191,21 @@ void motor_set_speed(float speed_r, float speed_l)
 
 void motor_curve(float speed, float radius, float angle)
 {
-	float speed_l, speed_r, distance_r, distance_l, distance;
+	float speed_l, speed_r, distance_r, distance_l, distance, t_l, t_r;
 
-	distance = angle * PI * radius / 180;
+	distance = angle * PI * radius / 180.0;
 
 	if(radius != 0) // Evite la division par 0
 	{
-		speed_l = abs((radius-(WHEELS_DISTANCE/2.0))*speed/radius);
-		speed_r = abs((radius+(WHEELS_DISTANCE/2.0))*speed/radius);
+		speed_l = fabs((radius-(WHEELS_DISTANCE/2.0))*speed/radius);
+		speed_r = fabs((radius+(WHEELS_DISTANCE/2.0))*speed/radius);
 		distance_l = (radius-(WHEELS_DISTANCE/2.0))*distance/radius;
 		distance_r = (radius+(WHEELS_DISTANCE/2.0))*distance/radius;
 
 		motor_set_position(distance_r, distance_l, speed_r, speed_l);
+
+		t_l = distance_l / speed_l;
+		t_r = distance_r / speed_r;
 	}
 }
 
@@ -211,7 +223,10 @@ void MOTOR_RIGHT_IRQHandler(void)
 	}
 
 	else // Si le goal a été atteint, le moteur s'arrête
+	{
 		right_motor_update(step_halt);
+		motor_reset_right();
+	}
 
 	// Clear interrupt flag
 	MOTOR_RIGHT_TIMER->SR &= ~TIM_SR_UIF;
@@ -232,7 +247,10 @@ void MOTOR_LEFT_IRQHandler(void)
 	}
 
 	else // Si le goal a été atteint, le moteur s'arrête
+	{
 		left_motor_update(step_halt);
+		motor_reset_left();
+	}
 
 	// Clear interrupt flag
     MOTOR_LEFT_TIMER->SR &= ~TIM_SR_UIF;
@@ -259,4 +277,9 @@ void motor_forward(float distance, float speed)
     return;
   }
   motor_set_position(distance, distance, speed, speed);
+}
+
+bool isFinished()
+{
+	return ((step_goal_right == 0) && (step_goal_left == 0));
 }
