@@ -10,5 +10,6 @@ void motor_set_speed(float speed_r, float speed_l);
 void motor_set_position(float position_r, float position_l, float speed_r, float speed_l);
 void motor_stop(void);
 void motor_turn(float angle, float speed);
+void motor_forward(float distance, float speed);
 
 #endif /* MOTOR_H */

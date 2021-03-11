@@ -249,3 +249,11 @@ void motor_turn(float angle, float speed)
 
   motor_set_position(distance, distance, speed, speed);
 }
+
+void motor_forward(float distance, float speed)
+{
+  if(speed == 0.f) {
+    return;
+  }
+  motor_set_position(distance, distance, speed, speed);
+}
