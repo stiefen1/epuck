@@ -221,3 +221,16 @@ void MOTOR_LEFT_IRQHandler(void)
     MOTOR_LEFT_TIMER->SR;	// Read back in order to ensure the effective IF clearing
 }
 
+void motor_turn(float angle, float speed)
+{
+  float distance = WHEELS_DISTANCE*PI*angle/360.f;
+
+  if(speed == 0.f) {
+    // (Julien) vitesse nulle, on devrait afficher
+    // une erreur, mais ici je me contente de 
+    // rien faire
+    return;
+  }
+
+  motor_set_position(distance, distance, speed, speed);
+}
