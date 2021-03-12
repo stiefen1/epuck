@@ -12,8 +12,9 @@ void motor_stop(void);
 void motor_turn(float angle, float speed);
 void motor_forward(float distance, float speed);
 void motor_curve(float speed, float radius, float angle);
-bool isFinished();
-void motor_reset_right();
-void motor_reset_left();
+bool isFinished(void);
+void motor_reset_right(void);
+void motor_reset_left(void);
+void moveL(float x, float y, float speed);
 
 #endif /* MOTOR_H */

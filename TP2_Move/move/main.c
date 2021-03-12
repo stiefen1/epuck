@@ -41,10 +41,12 @@ int main(void)
 
     motor_init();
 
+    moveL(50, -50, 10);
+
     while (1) {
         //if(isFinished())
         	//set_PWM_Frequency(6*get_selector());
-
+/*
     	if(isFinished())
     	{
     		switch(sylvain)
@@ -87,7 +89,7 @@ int main(void)
     		}
 
     		sylvain++;
-    	}
+    	}*/
     }
 }
 

@@ -191,7 +191,7 @@ void motor_set_speed(float speed_r, float speed_l)
 
 void motor_curve(float speed, float radius, float angle)
 {
-	float speed_l, speed_r, distance_r, distance_l, distance, t_l, t_r;
+	float speed_l, speed_r, distance_r, distance_l, distance;
 
 	distance = angle * PI * radius / 180.0;
 
@@ -203,10 +203,33 @@ void motor_curve(float speed, float radius, float angle)
 		distance_r = (radius+(WHEELS_DISTANCE/2.0))*distance/radius;
 
 		motor_set_position(distance_r, distance_l, speed_r, speed_l);
-
-		t_l = distance_l / speed_l;
-		t_r = distance_r / speed_r;
 	}
+}
+
+void moveL(float x, float y, float speed)
+{
+	// Pour chaque consigne de position (coordonnée x,y) le robot tourne puis se déplace linéairement
+
+	float alpha, hypotenuse; // Consigne de déplacement angulaire et linéaire
+
+	if(x != 0.0)
+	{
+		alpha = 180.0*atan(y/x)/PI;
+
+		if(y>0 && x<0) // Adapte la consigne d'angle selon le cadran
+			alpha = alpha + 180;
+
+		else if(y<0 && x<0)
+			alpha = alpha + 180;
+	}
+
+	hypotenuse = sqrt(x*x + y*y);
+
+	motor_turn(alpha-90, speed);
+	while(!isFinished()){} // Attend que la rotation soit terminée
+
+	motor_forward(hypotenuse, speed);
+	while(!isFinished()){} // Attend que le déplacement soit terminé
 }
 
 void MOTOR_RIGHT_IRQHandler(void)
