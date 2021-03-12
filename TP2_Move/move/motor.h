@@ -16,5 +16,6 @@ bool isFinished(void);
 void motor_reset_right(void);
 void motor_reset_left(void);
 void moveL(float x, float y, float speed);
+void moveJ(float x, float y, float radius, float speed);
 
 #endif /* MOTOR_H */

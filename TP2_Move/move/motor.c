@@ -216,10 +216,7 @@ void moveL(float x, float y, float speed)
 	{
 		alpha = 180.0*atan(y/x)/PI;
 
-		if(y>0 && x<0) // Adapte la consigne d'angle selon le cadran
-			alpha = alpha + 180;
-
-		else if(y<0 && x<0)
+		if(x<0) // Adapte la consigne d'angle selon le cadran
 			alpha = alpha + 180;
 	}
 
@@ -230,6 +227,39 @@ void moveL(float x, float y, float speed)
 
 	motor_forward(hypotenuse, speed);
 	while(!isFinished()){} // Attend que le déplacement soit terminé
+}
+
+void moveJ(float x, float y, float radius, float speed)
+{
+	/*
+	 * Déplacement au point P(x,y) avec une courbe de rayon "radius".
+	 * Avant de faire la courbe, le robot tourne sur lui même d'un angle beta+alpha/2 CC
+	 */
+
+	float hypotenuse, alpha, beta;
+
+	// Distance droite jusqu'au point d'arrivée
+	hypotenuse = sqrt(x*x+y*y);
+
+	if(2*radius>hypotenuse)
+	{
+		beta = 180.0*atan(y/x)/PI;
+
+		if(y<0 && x<0)
+			beta = beta - 180;
+
+		else if(y<0 && x>0)
+			beta = beta + 180;
+
+		alpha = 180.0*2.0*atan(hypotenuse/(sqrt(4*radius*radius-x*x-y*y)))/PI;
+
+		motor_turn(-(beta+alpha/2), speed);
+		while(!isFinished()){}
+
+		motor_curve(speed, radius, alpha);
+		while(!isFinished()){}
+	}
+
 }
 
 void MOTOR_RIGHT_IRQHandler(void)
