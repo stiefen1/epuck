@@ -25,6 +25,11 @@ void imu_compute_units(void){
 	/*
     *   TASK 10 : TO COMPLETE
     */
+	for(uint8_t axis = 0; axis < NB_AXIS; ++axis)
+	{
+		imu_values.acceleration[axis] = (STANDARD_GRAVITY*(imu_values.acc_raw[axis] - imu_values.acc_offset[axis])) / 16384;
+		imu_values.gyro_rate[axis] = DEG2RAD(imu_values.gyro_raw[axis] - imu_values.gyro_offset[axis]);
+	}
 }
 
  /**
@@ -100,6 +105,28 @@ void imu_compute_offset(messagebus_topic_t * imu_topic, uint16_t nb_samples){
     /*
     *   TASK 9 : TO COMPLETE
     */
+	int32_t acc_average[NB_AXIS] = {0, 0, 0};
+	int32_t gyro_average[NB_AXIS] = {0, 0, 0};
+
+    // Somme sur nb_samples de l'acc. et gyro.
+	for(uint16_t i = 0; i<nb_samples; i++)
+	{
+	    messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
+
+	    for(uint8_t axis = 0; axis < NB_AXIS; axis++)
+	    {
+	    	acc_average[axis] += imu_values.acc_raw[axis];
+	    	gyro_average[axis] += imu_values.gyro_raw[axis];
+	    }
+	}
+
+	// Calcul de l'acc. et gyro moy sur nb_samples
+    for(uint8_t axis = 0; axis < NB_AXIS; axis++)
+    {
+    	imu_values.acc_offset[axis] = acc_average[axis]/nb_samples;
+    	imu_values.gyro_offset[axis] = gyro_average[axis]/nb_samples;
+    }
+
 }
 
 int16_t get_acc(uint8_t axis) {
