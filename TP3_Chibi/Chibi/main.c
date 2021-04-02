@@ -5,6 +5,7 @@
 #include <messagebus.h>
 #include <i2c_bus.h>
 #include <imu.h>
+#include <motors.h>
 
 #define NB_SAMPLES_OFFSET     200
 
@@ -160,6 +161,8 @@ void show_gravity(imu_msg_t *imu_values){
     	//palSetPadMode(GPIOD, GPIOD_LED5, 0);
     	palSetPad(GPIOD, GPIOD_LED1);       /* Orange.  */
     	palClearPad(GPIOD, GPIOD_LED5);
+    	right_motor_set_speed(1000);
+    	left_motor_set_speed(1000);
     }
 
     else if(imu_values->acceleration[Y_AXIS] < -1.0)
@@ -190,6 +193,12 @@ int main(void)
     timer11_start();
     i2c_start();
     imu_start();
+    motors_init();
+
+    mpu_init();
+
+	//inits the motors
+	motors_init();
 
     /** Inits the Inter Process Communication bus. */
     messagebus_init(&bus, &bus_lock, &bus_condvar);

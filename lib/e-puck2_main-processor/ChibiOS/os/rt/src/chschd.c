@@ -463,7 +463,7 @@ void chSchDoRescheduleBehind(void) {
 #if CH_CFG_TIME_QUANTUM > 0
   otp->p_preempt = (tslices_t)CH_CFG_TIME_QUANTUM;
 #endif
-  (void) chSchReadyI(otp);
+et  (void) chSchReadyI(otp);
   chSysSwitch(currp, otp);
 }
 

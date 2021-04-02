@@ -52,10 +52,10 @@ static THD_FUNCTION(PiRegulator, arg) {
         	/*
         	 * Si le terme intégral dépasse 5, sa valeur est limitée à 5
         	 */
-        	if(error > 5)
+        	if(integral > 5)
         		integral = 5;
 
-        	else if(error < -5)
+        	else if(integral < -5)
         		integral = -5;
 
         	else
