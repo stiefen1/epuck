@@ -36,12 +36,13 @@ static THD_FUNCTION(CaptureImage, arg) {
 		dcmi_capture_start();
 		//waits for the capture to be done
 		wait_image_ready();
-		//signals an image has been captured
+
 		//chThdSleepMilliseconds(12);
 
 		//time = chVTGetSystemTime() - time;
         //chprintf((BaseSequentialStream *)&SD3, "time = %d", time);
 
+		//signals an image has been captured
 		chBSemSignal(&image_ready_sem);
     }
 }

@@ -6,6 +6,8 @@
 #include "ch.h"
 #include "hal.h"
 #include "memory_protection.h"
+#include "sensors/imu.h"
+#include "i2c_bus.h"
 #include <usbcfg.h>
 #include <main.h>
 #include <motors.h>
@@ -14,6 +16,10 @@
 
 #include <pi_regulator.h>
 #include <process_image.h>
+
+messagebus_t bus;
+MUTEX_DECL(bus_lock);
+CONDVAR_DECL(bus_condvar);
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size) 
 {
@@ -39,7 +45,10 @@ int main(void)
 
     halInit();
     chSysInit();
+
     mpu_init();
+	//inits the motors
+	motors_init();
 
     //starts the serial communication
     serial_start();
@@ -48,8 +57,19 @@ int main(void)
     //starts the camera
     dcmi_start();
 	po8030_start();
-	//inits the motors
-	motors_init();
+
+	// starts the i2c communication
+	//i2c_start(); Already done in the imu_start() function
+
+
+	//starts the accelerometer
+	imu_start();
+
+	// Inits the Inter Process Communication bus
+	messagebus_init(&bus, &bus_lock, &bus_condvar);
+
+	messagebus_topic_t *imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
+	imu_msg_t imu_values;
 
 	//stars the threads for the pi regulator and the processing of the image
 	pi_regulator_start();
@@ -57,8 +77,13 @@ int main(void)
 
     /* Infinite loop. */
     while (1) {
+    	// Wait for new measures to be published on the i2C bus
+    	messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
+
+    	chprintf((BaseSequentialStream *)&SD3, "Ax = %-7d", imu_values.acc_raw[X_AXIS]);
+
     	//waits 1 second
-        chThdSleepMilliseconds(1000);
+        chThdSleepMilliseconds(100);
     }
 }
 
