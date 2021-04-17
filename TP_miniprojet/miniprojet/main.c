@@ -7,6 +7,7 @@
 #include "hal.h"
 #include "memory_protection.h"
 #include "sensors/imu.h"
+#include "sensors/proximity.h"
 #include "i2c_bus.h"
 #include <usbcfg.h>
 #include <main.h>
@@ -15,7 +16,7 @@
 #include <chprintf.h>
 
 #include <pi_regulator.h>
-#include <process_image.h>
+#include <compute_data.h>
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -65,22 +66,31 @@ int main(void)
 	//starts the accelerometer
 	imu_start();
 
+	// starts the proximity sensors
+	proximity_start();
+
 	// Inits the Inter Process Communication bus
 	messagebus_init(&bus, &bus_lock, &bus_condvar);
 
-	messagebus_topic_t *imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
-	imu_msg_t imu_values;
+	//messagebus_topic_t *imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
+	//imu_msg_t imu_values;
 
-	//stars the threads for the pi regulator and the processing of the image
+	//messagebus_topic_t *proximity_topic = messagebus_find_topic_blocking(&bus, "/proximity");
+	//proximity_msg_t prox_values;
+
+	//stars the threads for the pi regulator
 	pi_regulator_start();
-	process_image_start();
 
     /* Infinite loop. */
     while (1) {
     	// Wait for new measures to be published on the i2C bus
-    	messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
+    	//messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
-    	chprintf((BaseSequentialStream *)&SD3, "Ax = %-7d", imu_values.acc_raw[X_AXIS]);
+
+    	//messagebus_topic_wait(proximity_topic, &prox_values, sizeof(prox_values));
+
+    	//chprintf((BaseSequentialStream *)&SD3, "prox = %d", get_prox(0));
+
 
     	//waits 1 second
         chThdSleepMilliseconds(100);

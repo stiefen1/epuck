@@ -79,7 +79,7 @@ void chSysHalt(const char *reason);
 void _unhandled_exception(void) {
 /*lint -restore*/
 
-  chSysHalt("unhandled exception");
+   chSysHalt("unhandled exception");
   while (true) {
   }
 }
