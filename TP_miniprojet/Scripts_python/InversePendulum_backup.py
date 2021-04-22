@@ -62,18 +62,31 @@ def update_plot():
         fig.canvas.draw_idle()
         reader_thd.plot_updated()
 
+#returns a sinus in an np.array of float64
+#def do_sinus(freq, amp): 
+#    m = np.linspace(0, n, num=(fs*n))
+#    sinus = amp*np.sin(2*np.pi*freq*m)
+#    sinus = sinus[0:n]
+#    return sinus
+
+#returns the norm of the values of the FFT performed on the dataset given 
+#an n.array of float64
+#def do_fft(array): 
+#    FFT = np.fft.fft(array)
+#    FFT_norme = np.sqrt(np.add(np.multiply(np.real(FFT),np.real(FFT)),(np.multiply(np.imag(FFT),np.imag(FFT)))))
+#    return FFT_norme
+
 #function used to update the plot of the sinus
-def update_speed_plot(port):
+def update_speed_plot(val):
     
-    speed = readFloatSerial(port)
-
-    if(len(speed) > 0):
-        speed_plot.set_ydata(speed)
+    speed = np.linspace(0, n, num=(fs*n))
+    
+    speed_plot.set_ydata(speed)
                        
-        graph_speed.relim()
-        graph_speed.autoscale()
+    graph_speed.relim()
+    graph_speed.autoscale()
 
-        reader_thd.tell_to_update_plot()
+    reader_thd.tell_to_update_plot()
     
 
 #function used to update the plot of the FFT
@@ -191,6 +204,7 @@ class serial_thread(Thread):
     def __init__(self, port):
         Thread.__init__(self)
         self.contReceive = False
+        self.contSendAndReceive = False
         self.alive = True
         self.need_to_update = False
 
@@ -206,9 +220,12 @@ class serial_thread(Thread):
     def run(self):
         
         while(self.alive):
-            if(self.contReceive):
+            if(self.contSendAndReceive):
+                sendFloatSerial(self.port)
                 update_acc_plot(self.port)
-                update_speed_plot(self.port)
+
+            elif(self.contReceive):
+                update_acc_plot(self.port)
             else:
                 #flush the serial
                 self.port.read(self.port.inWaiting())
@@ -219,6 +236,13 @@ class serial_thread(Thread):
     def setContReceive(self, val):  
         self.contSendAndReceive = False
         self.contReceive = True
+
+    #disables the continuous reading
+    #and enables the continuous sending and receiving
+        
+#    def setContSendAndReceive(self, val):
+#        self.contSendAndReceive = True
+#        self.contReceive = False
 
     #disables the continuous reading
     #and disables the continuous sending and receiving
@@ -265,16 +289,19 @@ fig.canvas.set_window_title('Inverse Pendulum')
 plt.subplots_adjust(left=0.1, bottom=0.25)
 fig.canvas.mpl_connect('close_event', handle_close) #to detect when the window is closed and if we do a ctrl-c
 
-#speed graph config with initial plot
+#sinus graph config with initial plot
+#graph_sinus = plt.subplot(211)
 graph_speed = plt.subplot(211)
-speed = np.zeros(n)
+#sinus = do_sinus(f0,A)
+speed = np.linspace(0, n, num=(fs*n))
+#sinus_plot, = plt.plot(sinus, lw=1, color='red')
 speed_plot, = plt.plot(speed, lw=1, color = 'red')
-plt.ylabel("speed");
 
-#acceleration graph config with initial plot
+#FFT graph config with initial plot
 graph_acc = plt.subplot(212)
-acc_data = np.zeros(n)
+acc_data = np.linspace(0, n, n)
 acc_plot, = plt.plot(acc_data,lw=1, color='red')
+#fft_plot, = plt.plot(np.arange(-n/2,n/2,1), do_fft(sinus),lw=1, color='red')
 plt.ylabel("x acceleration")
 
 #timer to update the plot from within the state machine of matplotlib
@@ -287,18 +314,24 @@ timer.start()
 colorAx             = 'lightgoldenrodyellow'
 accAx               = plt.axes([0.1, 0.1, 0.8, 0.03], facecolor=colorAx)
 speedAx             = plt.axes([0.1, 0.15, 0.8, 0.03], facecolor=colorAx)
+#resetAx             = plt.axes([0.8, 0.025, 0.1, 0.04])
+#sendAndReceiveAx    = plt.axes([0.1, 0.025, 0.15, 0.04])
 receiveAx           = plt.axes([0.25, 0.025, 0.1, 0.04])
 stopAx              = plt.axes([0.35, 0.025, 0.1, 0.04])
 
 #config of the buttons, sliders and radio buttons
 sacc                    = Slider(accAx, 'kp', 0.1, 100, valinit=kp_0, valstep=0.1)
 sspeed                  = Slider(speedAx, 'ki', 0.1, 100, valinit=ki_0, valstep=0.1)
+#resetButton             = Button(resetAx, 'Reset sinus', color=colorAx, hovercolor='0.975')
+#sendAndReceiveButton   = Button(sendAndReceiveAx, 'Send sinus and read', color=colorAx, hovercolor='0.975')
 receiveButton           = Button(receiveAx, 'Read', color=colorAx, hovercolor='0.975')
 stop                    = Button(stopAx, 'Stop', color=colorAx, hovercolor='0.975')
 
 #callback config of the buttons, sliders and radio buttons
 sacc.on_changed(update_acc_plot)
 sspeed.on_changed(update_speed_plot)
+#resetButton.on_clicked(reset)
+#sendAndReceiveButton.on_clicked(reader_thd.setContSendAndReceive)
 receiveButton.on_clicked(reader_thd.setContReceive)
 stop.on_clicked(reader_thd.stop_reading)
 
