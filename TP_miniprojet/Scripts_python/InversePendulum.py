@@ -198,8 +198,9 @@ class serial_thread(Thread):
         
         try:
             self.port = serial.Serial(port, timeout=0.5)
-        except:
+        except Exception as inst:
             print('Cannot connect to the e-puck2')
+            print(inst)
             sys.exit(0)
             
     #function called after the init
@@ -250,13 +251,15 @@ class serial_thread(Thread):
 
         
 #test if the serial port as been given as argument in the terminal
-if len(sys.argv) == 1:
-    print('Please give the serial port to use as argument')
-    sys.exit(0)
+
+# if len(sys.argv) == 1:
+    # print('Please give the serial port to use as argument')
+    # sys.exit(0)
     
 #serial reader thread config
 #begins the serial thread
-reader_thd = serial_thread(sys.argv[1])
+# reader_thd = serial_thread(sys.argv[1])
+reader_thd = serial_thread("com13")
 reader_thd.start()
 
 #figure config
