@@ -49,6 +49,7 @@ int main(void)
 
   reg_param.kp = -3.0;
   reg_param.kd = -200.0;
+  reg_param.ki = 0.0;
 
     halInit();
   chSysInit();

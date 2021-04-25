@@ -4,6 +4,7 @@
 typedef struct {
   float kp;
   float kd;
+  float ki;
 } RegParam;
 
 //start the PI regulator thread

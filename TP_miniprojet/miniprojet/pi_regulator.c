@@ -1,16 +1,18 @@
-#include "ch.h"
-#include "hal.h"
+#include <ch.h>
+#include <hal.h>
 #include <math.h>
 #include <usbcfg.h>
 #include <chprintf.h>
-#include "sensors/imu.h"
-#include "sensors/proximity.h"
+#include <sensors/imu.h>
+#include <sensors/proximity.h>
 #include <leds.h>
-
-#include <main.h>
 #include <motors.h>
-#include <pi_regulator.h>
-#include <compute_data.h>
+
+#include "main.h"
+#include "pi_regulator.h"
+#include "compute_data.h"
+#include "send_data.h"
+#include "receive_data.h"
 
 #define NB_SAMPLES 1024
 
@@ -20,88 +22,6 @@ static float acc[NB_SAMPLES] = {0};
 static float speed[NB_SAMPLES] = {0};
 static uint16_t i = 0;
 
-void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size)
-{
-	chSequentialStreamWrite(out, (uint8_t*)"START", 5);
-	chSequentialStreamWrite(out, (uint8_t*)&size, sizeof(uint16_t));
-	chSequentialStreamWrite(out, (uint8_t*)data, sizeof(float) * size);
-}
-
-void SendFloatToComputerFast(BaseSequentialStream* out, float data)
-{
-	chSequentialStreamWrite(out, (uint8_t*)&data, sizeof(float));
-}
-
-
-uint16_t ReceiveFloatFromComputer(BaseSequentialStream* in, float* data, uint16_t size){
-
-	volatile uint8_t c1, c2;
-	volatile uint16_t temp_size = 0;
-	uint16_t i=0;
-
-	volatile uint8_t state = 0;
-	while(state != 5){
-
-        c1 = chSequentialStreamGet(in);
-
-        //State machine to detect the string EOF\0S in order synchronize
-        //with the frame received
-        switch(state){
-        	case 0:
-        		if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-          break;
-        	case 1:
-        		if(c1 == 'T')
-        			state = 2;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-          break;
-        	case 2:
-        		if(c1 == 'A')
-        			state = 3;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-          break;
-        	case 3:
-        		if(c1 == 'R')
-        			state = 4;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-          break;
-        	case 4:
-        		if(c1 == 'T')
-        			state = 5;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-          break;
-        }
-
-	}
-
-	c1 = chSequentialStreamGet(in);
-	c2 = chSequentialStreamGet(in);
-
-	// The first 2 bytes is the length of the datas
-	// -> number of int16_t data
-	temp_size = (int16_t)((c1 | c2<<8));
-
-	if(temp_size/4 == size){
-    chSequentialStreamRead(in, (uint8_t*)data, temp_size);
-	}
-	return temp_size;
-
-}
 
 static THD_WORKING_AREA(waPiRegulator, 256);
 static THD_FUNCTION(PiRegulator, arg) {
@@ -116,10 +36,9 @@ static THD_FUNCTION(PiRegulator, arg) {
     float acc_error = 0.0;
     float acc_error_derivative = 0.0;
     float acc_consigne = 0.0;
+    float acc_error_integral = 0;
 
     // PD Regulator
-    float kp = -3.0;
-    float kd = -200; // -10
     RegParam* reg_param = (RegParam*)arg;
 
     float prox_consigne = 30; // Env. 6 cm
@@ -190,9 +109,10 @@ static THD_FUNCTION(PiRegulator, arg) {
        	// Inverse Pendulum regulator (PD)
        	acc_error = acc_y - acc_consigne;
        	acc_error_derivative += acc_error; // d[k] = e[k] - e[k-1]
+        acc_error_integral += acc_error;
 
        	// Set speed as the integral of acceleration
-       	speed_pd_commande += reg_param->kp*acc_error + reg_param->kd*acc_error_derivative;
+       	speed_pd_commande += reg_param->kp*acc_error + reg_param->kd*acc_error_derivative + reg_param->ki*acc_error_integral;
 
        	if(abs(speed_pd_commande) > MOTOR_SPEED_LIMIT)
        	{
@@ -207,8 +127,8 @@ static THD_FUNCTION(PiRegulator, arg) {
        	//speed_l = 1000.0*speed_l/(2.0*3.14159*13.0);
        	//speed_r = 1000.0*speed_r/(2.0*3.14159*13.0);
 
-       	//right_motor_set_speed(speed_pd_commande);// + speed_pi_commande);//speed+speed_r);
-       	//left_motor_set_speed(speed_pd_commande);// + speed_pi_commande);//speed+speed_l);
+       	right_motor_set_speed(speed_pd_commande);// + speed_pi_commande);//speed+speed_r);
+       	left_motor_set_speed(speed_pd_commande);// + speed_pi_commande);//speed+speed_l);
 
         acc[i++] = acc_y;
 
@@ -226,13 +146,14 @@ static THD_FUNCTION(PiRegulator, arg) {
 
 static THD_WORKING_AREA(waPiRegulatorReader, 256);
 static THD_FUNCTION(PiRegulatorReader, arg) {
-  float data[2];
+  float data[3];
   RegParam* reg_param = (RegParam*)arg;
 
   while(true) {
-    ReceiveFloatFromComputer((BaseSequentialStream *)&SD3, data, 2);
+    ReceiveFloatFromComputer((BaseSequentialStream *)&SD3, data, 3);
     reg_param->kp = data[0];
     reg_param->kd = data[1];
+    reg_param->ki = data[2];
 
     set_front_led(1);
     chThdSleepMilliseconds(1000);
