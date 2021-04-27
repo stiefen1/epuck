@@ -14,8 +14,6 @@
 #include "send_data.h"
 #include "receive_data.h"
 
-#define NB_SAMPLES 1024
-
 static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
 
 static float acc[NB_SAMPLES] = {0};

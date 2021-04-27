@@ -14,6 +14,7 @@ CSRC += ./main.c \
 		./compute_data.c \
 		./send_data.c \
 		./receive_data.c \
+		./auto_regulator.c \
 
 # List ASM source files here
 ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)

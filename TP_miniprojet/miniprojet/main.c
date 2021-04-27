@@ -3,21 +3,22 @@
 #include <string.h>
 #include <math.h>
 
-#include "ch.h"
-#include "hal.h"
-#include "memory_protection.h"
-#include "sensors/imu.h"
-#include "sensors/proximity.h"
-#include "i2c_bus.h"
-#include "leds.h"
+#include <ch.h>
+#include <hal.h>
+#include <memory_protection.h>
+#include <sensors/imu.h>
+#include <sensors/proximity.h>
+#include <i2c_bus.h>
+#include <leds.h>
 #include <usbcfg.h>
 #include <main.h>
 #include <motors.h>
 #include <camera/po8030.h>
 #include <chprintf.h>
 
-#include <pi_regulator.h>
-#include <compute_data.h>
+#include "pi_regulator.h"
+#include "auto_regulator.h"
+#include "compute_data.h"
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -90,7 +91,7 @@ int main(void)
   //proximity_msg_t prox_values;
 
   //stars the threads for the pi regulator
-  pi_regulator_start(&reg_param);
+  auto_regulator_start(&reg_param);
 
   /* Infinite loop. */
   while (1) {
