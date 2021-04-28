@@ -7,10 +7,10 @@ typedef struct {
   float kp;
   float kd;
   float ki;
-} RegParam;
+} reg_param_t;
 
 //start the PI regulator thread
-void pi_regulator_start(RegParam* reg_param);
+void pi_regulator_start(reg_param_t* reg_param);
 
 
 #endif /* PI_REGULATOR_H */

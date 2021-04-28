@@ -17,7 +17,7 @@
 
 static float acc[NB_SAMPLES] = {0};
 
-static void run_regulator_test(RegParam* reg_param, float perturbation)
+static void run_regulator_test(reg_param_t* reg_param, float perturbation)
 {
     systime_t time;
 
@@ -81,7 +81,7 @@ static THD_FUNCTION(AutoRegulator, arg) {
   chRegSetThreadName(__FUNCTION__);
 
   // Paramètres du régulateur
-  RegParam* reg_param = (RegParam*)arg;
+  reg_param_t* reg_param = (reg_param_t*)arg;
   float data[3];
 
   // Réception des paramètres du régulateur
@@ -150,6 +150,6 @@ static THD_FUNCTION(AutoRegulator, arg) {
   }
 }
 
-void auto_regulator_start(RegParam* reg_param) {
+void auto_regulator_start(reg_param_t* reg_param) {
 	chThdCreateStatic(waAutoRegulator, sizeof(waAutoRegulator), NORMALPRIO, AutoRegulator, (void*)reg_param);
 }
