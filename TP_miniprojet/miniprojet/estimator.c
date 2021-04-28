@@ -47,8 +47,7 @@ static THD_FUNCTION(Estimator, arg) {
 
     // Intégration toute simple pour l'instant
     dt = (float)elapsed_us/1000000.f;
-    estimator_values.omega_x += dt * imu_values.gyro_rate[0];
-    estimator_values.angle_x += dt * estimator_values.omega_x;
+    estimator_values.angle_x += dt * imu_values.gyro_rate[0];
   }
 }
 
