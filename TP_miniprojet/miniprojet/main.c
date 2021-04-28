@@ -16,6 +16,7 @@
 #include <camera/po8030.h>
 #include <chprintf.h>
 
+#include "estimator.h"
 #include "pi_regulator.h"
 #include "auto_regulator.h"
 #include "compute_data.h"
@@ -45,7 +46,7 @@ static void serial_start(void)
 
 int main(void)
 {
-  RegParam reg_param;
+  reg_param_t reg_param;
   float data[2];
 
   reg_param.kp = -3.0;
@@ -91,7 +92,8 @@ int main(void)
   //proximity_msg_t prox_values;
 
   //stars the threads for the pi regulator
-  auto_regulator_start(&reg_param);
+  // auto_regulator_start(&reg_param);
+  estimator_start();
 
   /* Infinite loop. */
   while (1) {

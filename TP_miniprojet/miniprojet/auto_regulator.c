@@ -151,5 +151,5 @@ static THD_FUNCTION(AutoRegulator, arg) {
 }
 
 void auto_regulator_start(reg_param_t* reg_param) {
-	chThdCreateStatic(waAutoRegulator, sizeof(waAutoRegulator), NORMALPRIO, AutoRegulator, (void*)reg_param);
+	// chThdCreateStatic(waAutoRegulator, sizeof(waAutoRegulator), NORMALPRIO, AutoRegulator, (void*)reg_param);
 }

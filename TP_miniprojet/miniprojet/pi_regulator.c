@@ -17,87 +17,6 @@ static float acc[NB_SAMPLES] = {0};
 static float speed[NB_SAMPLES] = {0};
 static uint16_t i = 0;
 
-void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size)
-{
-	chSequentialStreamWrite(out, (uint8_t*)"START", 5);
-	chSequentialStreamWrite(out, (uint8_t*)&size, sizeof(uint16_t));
-	chSequentialStreamWrite(out, (uint8_t*)data, sizeof(float) * size);
-}
-
-
-uint16_t ReceiveFloatFromComputer(BaseSequentialStream* in, float* data, uint16_t size){
-
-	volatile uint8_t c1, c2;
-	volatile uint16_t temp_size = 0;
-	uint16_t i=0;
-
-	uint8_t state = 0;
-	while(state != 5){
-
-        c1 = chSequentialStreamGet(in);
-
-        //State machine to detect the string EOF\0S in order synchronize
-        //with the frame received
-        switch(state){
-        	case 0:
-        		if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-        	case 1:
-        		if(c1 == 'T')
-        			state = 2;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-        	case 2:
-        		if(c1 == 'A')
-        			state = 3;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-        	case 3:
-        		if(c1 == 'R')
-        			state = 4;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-        	case 4:
-        		if(c1 == 'T')
-        			state = 5;
-        		else if(c1 == 'S')
-        			state = 1;
-        		else
-        			state = 0;
-        }
-
-	}
-
-	c1 = chSequentialStreamGet(in);
-	c2 = chSequentialStreamGet(in);
-
-	// The first 2 bytes is the length of the datas
-	// -> number of int16_t data
-	temp_size = (int16_t)((c1 | c2<<8));
-
-	if((temp_size/2) == size){
-		for(i = 0 ; i < (temp_size/2) ; i++){
-
-			c1 = chSequentialStreamGet(in);
-			c2 = chSequentialStreamGet(in);
-
-			data[i*2] = (int16_t)((c1 | c2<<8));	//real
-			data[(i*2)+1] = 0;										//imaginary
-		}
-	}
-
-	return temp_size/2;
-
-}
-
 static THD_WORKING_AREA(waPiRegulator, 256);
 static THD_FUNCTION(PiRegulator, arg) {
 
@@ -226,6 +145,6 @@ static THD_FUNCTION(PiRegulator, arg) {
     }
 }
 
-void pi_regulator_start(void){
+void pi_regulator_start(reg_param_t* reg_param){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
 }
