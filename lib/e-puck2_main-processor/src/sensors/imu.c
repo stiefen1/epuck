@@ -200,6 +200,8 @@ int16_t get_acc_filtered(uint8_t axis, uint8_t filter_size) {
 // Saves an average of the last 50 samples for each axis, these values are the calibration/offset values.
 void calibrate_acc(void) {
 	if(imu_configured == true){
+    // Augmentation du nombre de sample à prendre
+    // sinon pas assez exact
 		accCalibrationInProgress = 1;
 		get_acc_filtered(0, 50);
 		accCalibrationInProgress = 1;
@@ -265,11 +267,11 @@ int16_t get_gyro_offset(uint8_t axis) {
 void calibrate_gyro(void) {
 	if(imu_configured == true){
 		gyroCalibrationInProgress = 1;
-		get_gyro_filtered(0, 50);
+		get_gyro_filtered(0, 1000);
 		gyroCalibrationInProgress = 1;
-		get_gyro_filtered(1, 50);
+		get_gyro_filtered(1, 1000);
 		gyroCalibrationInProgress = 1;
-		get_gyro_filtered(2, 50);
+		get_gyro_filtered(2, 1000);
 		gyroCalibrationInProgress = 0;
 	}
 	

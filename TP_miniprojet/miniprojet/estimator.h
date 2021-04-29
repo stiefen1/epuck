@@ -8,8 +8,6 @@
 typedef struct
 {
   float angle_x;
-  float omega_x;
-  float dt;
 } estimator_t;
 
 void estimator_start(void);

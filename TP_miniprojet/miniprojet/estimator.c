@@ -13,6 +13,10 @@
 #include "pi_regulator.h"
 #include "estimator.h"
 
+// Erreur linéaire
+#define LIN_ERR (1.0/30.0)/(1024.0*0.01) 
+#define STANDARD_GRAVITY    9.80665f 
+
 static estimator_t estimator_values;
 static float theta[NB_SAMPLES] = {0};
 
@@ -30,24 +34,24 @@ static THD_FUNCTION(Estimator, arg) {
   float dt;
   imu_msg_t imu_values;
   int32_t elapsed_us;
-
-  calibrate_gyro();
-  calibrate_acc();
-  calibrate_ir();
+  float total_time;
+  float alpha = 0.5f;
+  float angle_acc;
 
   while(true) {
-    start = chVTGetSystemTime();
-
     // Attente des valeurs des prochaines valeurs de l'IMU
     messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
     // Calcul du temps écoulé depuis la dernière itération
-    elapsed = chVTTimeElapsedSinceX(start);
-    elapsed_us = (int32_t)ST2US(elapsed);
+    elapsed_us = 4000;
 
-    // Intégration toute simple pour l'instant
+    // Calcul de l'angle grâce à l'accéléromètre
+    angle_acc = atan2f(imu_values.acceleration[1]/STANDARD_GRAVITY, -imu_values.acceleration[2]/STANDARD_GRAVITY);
+
+    // Sensor fusion
     dt = (float)elapsed_us/1000000.f;
-    estimator_values.angle_x += dt * imu_values.gyro_rate[0];
+    estimator_values.angle_x = alpha*(estimator_values.angle_x + dt * imu_values.gyro_rate[0]) + (1.f - alpha) * angle_acc;
+    // estimator_values.angle_x = angle_acc;
   }
 }
 
@@ -73,10 +77,9 @@ void estimator_start(void){
   messagebus_topic_t *imu_topic;
 
   estimator_values.angle_x = 0.f;
-  estimator_values.omega_x = 0.f;
 
   imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
 
-	chThdCreateStatic(waEstimator, sizeof(waEstimator), NORMALPRIO, Estimator, (void*)imu_topic);
-	chThdCreateStatic(waEstimatorWrite, sizeof(waEstimatorWrite), NORMALPRIO, EstimatorWrite, NULL);
+	chThdCreateStatic(waEstimator, sizeof(waEstimator), NORMALPRIO+2, Estimator, (void*)imu_topic);
+	// chThdCreateStatic(waEstimatorWrite, sizeof(waEstimatorWrite), NORMALPRIO, EstimatorWrite, NULL);
 }

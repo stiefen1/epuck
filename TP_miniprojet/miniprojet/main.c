@@ -49,8 +49,8 @@ int main(void)
   reg_param_t reg_param;
   float data[2];
 
-  reg_param.kp = -3.0;
-  reg_param.kd = -200.0;
+  reg_param.kp = 0.0;
+  reg_param.kd = 0.0;
   reg_param.ki = 0.0;
 
     halInit();
@@ -85,6 +85,13 @@ int main(void)
   // Inits the Inter Process Communication bus
   messagebus_init(&bus, &bus_lock, &bus_condvar);
 
+  // Calibration des senseurs
+  set_front_led(1);
+  calibrate_gyro();
+  calibrate_acc();
+  calibrate_ir();
+  set_front_led(0);
+
   //messagebus_topic_t *imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
   //imu_msg_t imu_values;
 
@@ -94,6 +101,7 @@ int main(void)
   //stars the threads for the pi regulator
   // auto_regulator_start(&reg_param);
   estimator_start();
+  pi_regulator_start(&reg_param);
 
   /* Infinite loop. */
   while (1) {
