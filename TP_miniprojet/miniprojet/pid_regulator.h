@@ -9,6 +9,7 @@ typedef struct {
   float ki;
   
   float integral;
+  float derivative;
 } reg_param_t;
 
 //start the PI regulator thread

@@ -10,12 +10,13 @@ GLOBAL_PATH = ../../lib/e-puck2_main-processor
 
 #Source files to include
 CSRC += ./main.c \
-		./pi_regulator.c \
-		./compute_data.c \
+		./pid_regulator.c \
+		./compute_imu_data.c \
 		./send_data.c \
 		./receive_data.c \
 		./auto_regulator.c \
 		./estimator.c \
+		./proximity_sensor.c \
 
 # List ASM source files here
 ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)

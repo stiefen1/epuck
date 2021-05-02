@@ -5,10 +5,10 @@
  *      Author: Steph
  */
 
-#ifndef COMPUTE_DATA_H_
-#define COMPUTE_DATA_H_
+#ifndef COMPUTE_IMU_DATA_H_
+#define COMPUTE_IMU_DATA_H_
 
 float get_computed_gyro(uint8_t axis);
 float get_computed_acc(uint8_t axis);
 
-#endif /* COMPUTE_DATA_H_ */
+#endif /* COMPUTE_IMU_DATA_H_ */

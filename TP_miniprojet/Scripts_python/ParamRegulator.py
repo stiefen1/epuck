@@ -1,8 +1,8 @@
-import serial
-import sys
-
 import matplotlib.pyplot as plt
 import numpy as np
+
+import serial
+import sys
 
 import struct
 
@@ -97,7 +97,7 @@ def sendFloatSerial(port, data):
 
 
 try:
-  conn = serial.Serial("COM13", timeout=1, baudrate=115200)
+  conn = serial.Serial("COM8", timeout=1, baudrate=115200)
 except Exception as inst:
   print(inst)
   sys.exit(0)
@@ -147,16 +147,16 @@ axcolor = 'lightgoldenrodyellow'
 axkp = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
 axkd = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
 
-skp = Slider(axkp, 'kp',-1000.0, 1000.0, valinit=0.0, valstep=1.0)
-skd = Slider(axkd, 'kd',-1000.0, -0.0, valinit=-200.0, valstep=10.0)
+skp = Slider(axkp, 'kp',0.0, 10000.0, valinit=0.0, valstep=10.0)
+skd = Slider(axkd, 'kd',0.0, 10000.0, valinit=0.0, valstep=10.0)
 
 axki = plt.axes([0.1, 0.2, 0.65, 0.03], facecolor=axcolor)
-ski = Slider(axki, 'ki',-1000.0, 1000.0, valinit=0.0, valstep=1)
+ski = Slider(axki, 'ki',0.0, 10.0, valinit=0.0, valstep=0.1)
 
 
 def send(event):
     print("send")
-    param = [skp.val, skd.val, ski.val]
+    param = [-skp.val, -skd.val, -ski.val]
     sendFloatSerial(conn, param)
     
 

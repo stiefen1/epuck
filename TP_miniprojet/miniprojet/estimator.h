@@ -11,6 +11,6 @@ typedef struct
 } estimator_t;
 
 void estimator_start(void);
-float get_angle_x();
+float get_angle_x(void);
 
 #endif

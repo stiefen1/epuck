@@ -15,11 +15,12 @@
 #include <motors.h>
 #include <camera/po8030.h>
 #include <chprintf.h>
+#include <compute_imu_data.h>
+#include <pid_regulator.h>
 
 #include "estimator.h"
-#include "pi_regulator.h"
 #include "auto_regulator.h"
-#include "compute_data.h"
+#include "proximity_sensor.h"
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -47,7 +48,6 @@ static void serial_start(void)
 int main(void)
 {
   reg_param_t reg_param;
-  float data[2];
 
   reg_param.kp = 0.0;
   reg_param.kd = 0.0;
@@ -64,13 +64,6 @@ int main(void)
   serial_start();
   //start the USB communication
   usb_start();
-  //starts the camera
-  dcmi_start();
-  po8030_start();
-
-  // starts the i2c communication
-  //i2c_start(); Already done in the imu_start() function
-
 
   //starts the accelerometer
   imu_start();
@@ -78,25 +71,20 @@ int main(void)
   // starts the proximity sensors
   proximity_start();
 
-  // init LED
-  // set_front_led(1);
-
-
   // Inits the Inter Process Communication bus
   messagebus_init(&bus, &bus_lock, &bus_condvar);
 
-  // Calibration des senseurs
+  // IMU calibration
   set_front_led(1);
   calibrate_gyro();
   calibrate_acc();
-  calibrate_ir();
   set_front_led(0);
 
-  //messagebus_topic_t *imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
-  //imu_msg_t imu_values;
+  // Calibration of the ambient IR intensity
+  calibrate_ir();
 
-  //messagebus_topic_t *proximity_topic = messagebus_find_topic_blocking(&bus, "/proximity");
-  //proximity_msg_t prox_values;
+  // Start to compute the datas from the IR sensors
+  prox_compute_start();
 
   //stars the threads for the pi regulator
   // auto_regulator_start(&reg_param);
@@ -105,16 +93,19 @@ int main(void)
 
   /* Infinite loop. */
   while (1) {
-    // Wait for new measures to be published on the i2C bus
-    //messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
 
-    //messagebus_topic_wait(proximity_topic, &prox_values, sizeof(prox_values));
+	  /*
+	   *
+	   *
+	   * DO NOTHING
+	   *
+	   *
+	   */
 
-    //chprintf((BaseSequentialStream *)&SD3, "prox = %d", get_prox(0));
 
     //waits 1 second
-    chThdSleepMilliseconds(100);
+    chThdSleepMilliseconds(1000);
   }
 }
 

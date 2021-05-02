@@ -3,15 +3,15 @@
 #include <math.h>
 #include <usbcfg.h>
 #include <chprintf.h>
+#include <compute_imu_data.h>
 #include <sensors/imu.h>
 #include <sensors/proximity.h>
 #include <leds.h>
 #include <motors.h>
+#include <pid_regulator.h>
 
 #include "main.h"
-#include "pi_regulator.h"
 #include "auto_regulator.h"
-#include "compute_data.h"
 #include "send_data.h"
 #include "receive_data.h"
 
