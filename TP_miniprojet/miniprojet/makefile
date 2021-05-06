@@ -14,7 +14,6 @@ CSRC += ./main.c \
 		./compute_imu_data.c \
 		./send_data.c \
 		./receive_data.c \
-		./auto_regulator.c \
 		./estimator.c \
 		./proximity_sensor.c \
 

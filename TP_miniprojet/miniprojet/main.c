@@ -11,39 +11,21 @@
 #include <i2c_bus.h>
 #include <leds.h>
 #include <usbcfg.h>
-#include <main.h>
 #include <motors.h>
-#include <camera/po8030.h>
 #include <chprintf.h>
-#include <compute_imu_data.h>
-#include <pid_regulator.h>
 
+#include "main.h"
+#include "compute_imu_data.h"
+#include "pid_regulator.h"
 #include "estimator.h"
-#include "auto_regulator.h"
 #include "proximity_sensor.h"
+#include "send_data.h"
+
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
 
-void SendUint8ToComputer(uint8_t* data, uint16_t size) 
-{
-	chSequentialStreamWrite((BaseSequentialStream *) &SD3, (uint8_t*)"START", 5);
-	chSequentialStreamWrite((BaseSequentialStream *) &SD3, (uint8_t*)&size, sizeof(uint16_t));
-	chSequentialStreamWrite((BaseSequentialStream *) &SD3, (uint8_t*)data, size);
-}
-
-static void serial_start(void)
-{
-	static SerialConfig ser_cfg = {
-	    115200,
-	    0,
-	    0,
-	    0,
-	};
-
-	sdStart(&SD3, &ser_cfg); // UART3.
-}
 
 int main(void)
 {
@@ -53,7 +35,7 @@ int main(void)
   reg_param.kd = 0.0;
   reg_param.ki = 0.0;
 
-    halInit();
+  halInit();
   chSysInit();
 
   mpu_init();

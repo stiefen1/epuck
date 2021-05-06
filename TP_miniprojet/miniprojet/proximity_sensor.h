@@ -17,8 +17,8 @@ typedef struct
 {
 	uint16_t prox_value[NB_SENSOR_USED];
 	uint16_t detection_limit;
-	int front_detection;
-	int back_detection;
+	uint8_t front_detection;
+	uint8_t back_detection;
 }prox_group_t;
 
 void prox_compute_start(void);

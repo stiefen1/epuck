@@ -8,7 +8,6 @@ uint16_t ReceiveFloatFromComputer(BaseSequentialStream* in, float* data, uint16_
 
 	volatile uint8_t c1, c2;
 	volatile uint16_t temp_size = 0;
-	uint16_t i=0;
 
 	volatile uint8_t state = 0;
 	while(state != 5){

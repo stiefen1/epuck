@@ -2,6 +2,6 @@
 #define SEND_DATA_H
 
 void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size);
-void SendFloatToComputerFast(BaseSequentialStream* out, float data);
+void serial_start(void);
 
 #endif

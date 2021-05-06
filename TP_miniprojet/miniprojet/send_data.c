@@ -11,9 +11,16 @@ void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size)
 	chSequentialStreamWrite(out, (uint8_t*)data, sizeof(float) * size);
 }
 
-void SendFloatToComputerFast(BaseSequentialStream* out, float data)
+void serial_start(void)
 {
-	chSequentialStreamWrite(out, (uint8_t*)&data, sizeof(float));
+	static SerialConfig ser_cfg = {
+	    115200,
+	    0,
+	    0,
+	    0,
+	};
+
+	sdStart(&SD3, &ser_cfg); // UART3.
 }
 
 

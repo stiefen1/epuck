@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
   55              	.LVL1:
   56              		.loc 1 78 0
   57 0018 019A     		ldr	r2, [sp, #4]
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 2
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 2
 
 
   58 001a 2368     		ldr	r3, [r4]
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  112              		.cfi_offset 10, -12
  113              		.cfi_offset 11, -8
  114              		.cfi_offset 14, -4
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 3
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 3
 
 
  115 0004 764B     		ldr	r3, .L17
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  169 0064 4FF0640A 		mov	r10, #100
  170              		.loc 2 31 0
  171 0068 8146     		mov	r9, r0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 4
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 4
 
 
  172              	.LVL8:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  226 00ec 8200     		lsls	r2, r0, #2
  227 00ee 47EA9073 		orr	r3, r7, r0, lsr #30
  228 00f2 1718     		adds	r7, r2, r0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 5
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 5
 
 
  229 00f4 43EB0108 		adc	r8, r3, r1
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  283 0196 6146     		mov	r1, ip
  284 0198 5846     		mov	r0, fp
  285 019a FFF7FEFF 		bl	__aeabi_uldivmod
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 6
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 6
 
 
  286              	.LVL16:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  340 01e8 C8040000 		.word	ch+1224
  341 01ec 1F85EB51 		.word	1374389535
  342 01f0 E0040000 		.word	ch+1248
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 7
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 7
 
 
  343 01f4 10000000 		.word	.LC1
@@ -395,9 +395,9 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  366 0040 0D0A00   		.ascii	"\015\012\000"
  367              		.text
  368              	.Letext0:
- 369              		.file 3 "c:\\users\\i354324\\eclipse_e-puck2\\tools\\gcc-arm-none-eabi-7-2017-q4-major-win32\\lib\
- 370              		.file 4 "c:\\users\\i354324\\eclipse_e-puck2\\tools\\gcc-arm-none-eabi-7-2017-q4-major-win32\\arm-
- 371              		.file 5 "c:\\users\\i354324\\eclipse_e-puck2\\tools\\gcc-arm-none-eabi-7-2017-q4-major-win32\\arm-
+ 369              		.file 3 "c:\\users\\steph\\desktop\\epfl\\passerelle_sem2\\sysemb_robotique\\eclipse_e-puck2\\tool
+ 370              		.file 4 "c:\\users\\steph\\desktop\\epfl\\passerelle_sem2\\sysemb_robotique\\eclipse_e-puck2\\tool
+ 371              		.file 5 "c:\\users\\steph\\desktop\\epfl\\passerelle_sem2\\sysemb_robotique\\eclipse_e-puck2\\tool
  372              		.file 6 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/ports/ARMCMx/compilers/GCC/chtypes.h"
  373              		.file 7 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chsystypes.h"
  374              		.file 8 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chschd.h"
@@ -412,13 +412,13 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  383              		.file 17 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chmtx.h"
  384              		.file 18 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chregistry.h"
  385              		.file 19 "../../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chstreams.h"
- 386              		.file 20 "c:\\users\\i354324\\eclipse_e-puck2\\tools\\gcc-arm-none-eabi-7-2017-q4-major-win32\\lib
+ 386              		.file 20 "c:\\users\\steph\\desktop\\epfl\\passerelle_sem2\\sysemb_robotique\\eclipse_e-puck2\\too
  387              		.file 21 "<built-in>"
  388              		.section	.debug_info,"",%progbits
  389              	.Ldebug_info0:
  390 0000 DF0C0000 		.4byte	0xcdf
  391 0004 0400     		.2byte	0x4
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 8
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 8
 
 
  392 0006 00000000 		.4byte	.Ldebug_abbrev0
@@ -427,7 +427,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  395 000c 38020000 		.4byte	.LASF171
  396 0010 0C       		.byte	0xc
  397 0011 B7070000 		.4byte	.LASF172
- 398 0015 1B080000 		.4byte	.LASF173
+ 398 0015 22080000 		.4byte	.LASF173
  399 0019 00000000 		.4byte	.Ldebug_ranges0+0
  400 001d 00000000 		.4byte	0
  401 0021 00000000 		.4byte	.Ldebug_line0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  446 0078 04       		.byte	0x4
  447 0079 39       		.byte	0x39
  448 007a 7E000000 		.4byte	0x7e
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 9
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 9
 
 
  449 007e 02       		.uleb128 0x2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  503 00f0 3C       		.byte	0x3c
  504 00f1 A9000000 		.4byte	0xa9
  505 00f5 04       		.uleb128 0x4
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 10
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 10
 
 
  506 00f6 99040000 		.4byte	.LASF21
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  560 016e 04       		.uleb128 0x4
  561 016f 2A070000 		.4byte	.LASF32
  562 0173 07       		.byte	0x7
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 11
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 11
 
 
  563 0174 33       		.byte	0x33
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  617 01e3 D2       		.byte	0xd2
  618 01e4 A1080000 		.4byte	0x8a1
  619 01e8 18       		.byte	0x18
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 12
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 12
 
 
  620 01e9 08       		.uleb128 0x8
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  674 0258 0A       		.uleb128 0xa
  675 0259 7E070000 		.4byte	.LASF49
  676 025d 08       		.byte	0x8
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 13
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 13
 
 
  677 025e 4001     		.2byte	0x140
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  731 02d0 07060000 		.4byte	.LASF34
  732 02d4 08       		.byte	0x8
  733 02d5 B1       		.byte	0xb1
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 14
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 14
 
 
  734 02d6 B2020000 		.4byte	0x2b2
@@ -790,7 +790,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  740 02e2 50       		.byte	0x50
  741 02e3 E7020000 		.4byte	0x2e7
  742 02e7 07       		.uleb128 0x7
- 743 02e8 C7080000 		.4byte	.LASF60
+ 743 02e8 D9080000 		.4byte	.LASF60
  744 02ec 08       		.byte	0x8
  745 02ed 08       		.byte	0x8
  746 02ee B7       		.byte	0xb7
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  788 0346 2B050000 		.4byte	0x52b
  789 034a 0C       		.byte	0xc
  790 034b 0A       		.uleb128 0xa
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 15
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 15
 
 
  791 034c BF010000 		.4byte	.LASF66
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  845 03be BE080000 		.4byte	0x8be
  846 03c2 04       		.byte	0x4
  847 03c3 0A       		.uleb128 0xa
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 16
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 16
 
 
  848 03c4 A3030000 		.4byte	.LASF74
@@ -907,7 +907,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  851 03cb 6E010000 		.4byte	0x16e
  852 03cf 08       		.byte	0x8
  853 03d0 0A       		.uleb128 0xa
- 854 03d1 BF080000 		.4byte	.LASF75
+ 854 03d1 D1080000 		.4byte	.LASF75
  855 03d5 08       		.byte	0x8
  856 03d6 6F01     		.2byte	0x16f
  857 03d8 73030000 		.4byte	0x373
@@ -949,7 +949,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  893 0425 6E010000 		.4byte	0x16e
  894 0429 08       		.byte	0x8
  895 042a 0A       		.uleb128 0xa
- 896 042b 65080000 		.4byte	.LASF79
+ 896 042b 77080000 		.4byte	.LASF79
  897 042f 08       		.byte	0x8
  898 0430 8201     		.2byte	0x182
  899 0432 79010000 		.4byte	0x179
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  902 0438 04       		.uleb128 0x4
  903 0439 6A000000 		.4byte	.LASF80
  904 043d 07       		.byte	0x7
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 17
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 17
 
 
  905 043e 6B       		.byte	0x6b
@@ -988,7 +988,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  929 0473 58010000 		.4byte	0x158
  930 0477 08       		.byte	0x8
  931 0478 0A       		.uleb128 0xa
- 932 0479 70080000 		.4byte	.LASF85
+ 932 0479 82080000 		.4byte	.LASF85
  933 047d 08       		.byte	0x8
  934 047e B901     		.2byte	0x1b9
  935 0480 13070000 		.4byte	0x713
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  959 04b4 EB030000 		.4byte	0x3eb
  960 04b8 1C       		.byte	0x1c
  961 04b9 09       		.uleb128 0x9
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 18
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 18
 
 
  962 04ba 64626700 		.ascii	"dbg\000"
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1016 0532 89       		.byte	0x89
  1017 0533 44050000 		.4byte	0x544
  1018 0537 15       		.uleb128 0x15
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 19
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 19
 
 
  1019 0538 72313300 		.ascii	"r13\000"
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1073 05a4 15       		.uleb128 0x15
  1074 05a5 73323300 		.ascii	"s23\000"
  1075 05a9 0C       		.byte	0xc
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 20
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 20
 
 
  1076 05aa FD       		.byte	0xfd
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1130 061b 0701     		.2byte	0x107
  1131 061d 15050000 		.4byte	0x515
  1132 0621 40       		.byte	0x40
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 21
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 21
 
 
  1133 0622 09       		.uleb128 0x9
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1187 068d 0D       		.byte	0xd
  1188 068e 51       		.byte	0x51
  1189 068f C4060000 		.4byte	0x6c4
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 22
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 22
 
 
  1190 0693 08       		.uleb128 0x8
@@ -1274,7 +1274,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1200 06a6 B2020000 		.4byte	0x2b2
  1201 06aa 04       		.byte	0x4
  1202 06ab 08       		.uleb128 0x8
- 1203 06ac A7080000 		.4byte	.LASF101
+ 1203 06ac B9080000 		.4byte	.LASF101
  1204 06b0 0D       		.byte	0xd
  1205 06b1 5D       		.byte	0x5d
  1206 06b2 8F030000 		.4byte	0x38f
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1244 06fd 0B       		.uleb128 0xb
  1245 06fe 04       		.byte	0x4
  1246 06ff C4060000 		.4byte	0x6c4
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 23
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 23
 
 
  1247 0703 18       		.uleb128 0x18
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1301 076d 0E       		.byte	0xe
  1302 076e 4C       		.byte	0x4c
  1303 076f 63010000 		.4byte	0x163
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 24
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 24
 
 
  1304 0773 0C       		.byte	0xc
@@ -1412,7 +1412,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1332 07a7 63010000 		.4byte	0x163
  1333 07ab 04       		.byte	0x4
  1334 07ac 08       		.uleb128 0x8
- 1335 07ad 94080000 		.4byte	.LASF117
+ 1335 07ad A6080000 		.4byte	.LASF117
  1336 07b1 0F       		.byte	0xf
  1337 07b2 3B       		.byte	0x3b
  1338 07b3 81070000 		.4byte	0x781
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1358 07d9 35060000 		.4byte	.LASF120
  1359 07dd 08       		.byte	0x8
  1360 07de 0101     		.2byte	0x101
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 25
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 25
 
 
  1361 07e0 42010000 		.4byte	0x142
@@ -1448,7 +1448,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1365 07ea 0801     		.2byte	0x108
  1366 07ec 42010000 		.4byte	0x142
  1367 07f0 1B       		.uleb128 0x1b
- 1368 07f1 5E080000 		.4byte	.LASF122
+ 1368 07f1 1B080000 		.4byte	.LASF122
  1369 07f5 08       		.byte	0x8
  1370 07f6 0F01     		.2byte	0x10f
  1371 07f8 8F030000 		.4byte	0x38f
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1415 0858 0B       		.uleb128 0xb
  1416 0859 04       		.byte	0x4
  1417 085a 33080000 		.4byte	0x833
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 26
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 26
 
 
  1418 085e 07       		.uleb128 0x7
@@ -1514,7 +1514,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1428 0871 DC020000 		.4byte	0x2dc
  1429 0875 00       		.byte	0
  1430 0876 08       		.uleb128 0x8
- 1431 0877 9F080000 		.4byte	.LASF132
+ 1431 0877 B1080000 		.4byte	.LASF132
  1432 087b 11       		.byte	0x11
  1433 087c 3C       		.byte	0x3c
  1434 087d B2020000 		.4byte	0x2b2
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1472 08cd 19       		.uleb128 0x19
  1473 08ce 2C000000 		.4byte	0x2c
  1474 08d2 30       		.byte	0x30
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 27
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 27
 
 
  1475 08d3 00       		.byte	0
@@ -1573,7 +1573,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1484 08e2 34       		.byte	0x34
  1485 08e3 C0090000 		.4byte	0x9c0
  1486 08e7 08       		.uleb128 0x8
- 1487 08e8 B1080000 		.4byte	.LASF136
+ 1487 08e8 C3080000 		.4byte	.LASF136
  1488 08ec 12       		.byte	0x12
  1489 08ed 35       		.byte	0x35
  1490 08ee C0090000 		.4byte	0x9c0
@@ -1591,7 +1591,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1502 0906 B4000000 		.4byte	0xb4
  1503 090a 05       		.byte	0x5
  1504 090b 08       		.uleb128 0x8
- 1505 090c 7D080000 		.4byte	.LASF139
+ 1505 090c 8F080000 		.4byte	.LASF139
  1506 0910 12       		.byte	0x12
  1507 0911 38       		.byte	0x38
  1508 0912 C4000000 		.4byte	0xc4
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1529 093c AB060000 		.4byte	.LASF143
  1530 0940 12       		.byte	0x12
  1531 0941 3C       		.byte	0x3c
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 28
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 28
 
 
  1532 0942 B4000000 		.4byte	0xb4
@@ -1666,7 +1666,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1574 0996 B4000000 		.4byte	0xb4
  1575 099a 12       		.byte	0x12
  1576 099b 08       		.uleb128 0x8
- 1577 099c 88080000 		.4byte	.LASF151
+ 1577 099c 9A080000 		.4byte	.LASF151
  1578 09a0 12       		.byte	0x12
  1579 09a1 45       		.byte	0x45
  1580 09a2 B4000000 		.4byte	0xb4
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1586 09ae B4000000 		.4byte	0xb4
  1587 09b2 14       		.byte	0x14
  1588 09b3 08       		.uleb128 0x8
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 29
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 29
 
 
  1589 09b4 16040000 		.4byte	.LASF153
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1643 0a26 15       		.uleb128 0x15
  1644 0a27 70757400 		.ascii	"put\000"
  1645 0a2b 13       		.byte	0x13
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 30
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 30
 
 
  1646 0a2c 41       		.byte	0x41
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1700 0aa7 B10A0000 		.4byte	0xab1
  1701 0aab 0E       		.uleb128 0xe
  1702 0aac 8F030000 		.4byte	0x38f
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 31
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 31
 
 
  1703 0ab0 00       		.byte	0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1757 0b1f 20       		.uleb128 0x20
  1758 0b20 6F757400 		.ascii	"out\000"
  1759 0b24 02       		.byte	0x2
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 32
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 32
 
 
  1760 0b25 0D       		.byte	0xd
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1814 0b99 DE000000 		.4byte	.LVL12
  1815 0b9d C30C0000 		.4byte	0xcc3
  1816 0ba1 AC0B0000 		.4byte	0xbac
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 33
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 33
 
 
  1817 0ba5 26       		.uleb128 0x26
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1871 0be7 22       		.uleb128 0x22
  1872 0be8 79       		.byte	0x79
  1873 0be9 00       		.sleb128 0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 34
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 34
 
 
  1874 0bea 79       		.byte	0x79
@@ -2038,11 +2038,11 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1928 0c33 0B       		.uleb128 0xb
  1929 0c34 04       		.byte	0x4
  1930 0c35 D20A0000 		.4byte	0xad2
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 35
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 35
 
 
  1931 0c39 28       		.uleb128 0x28
- 1932 0c3a D8080000 		.4byte	.LASF175
+ 1932 0c3a EA080000 		.4byte	.LASF175
  1933 0c3e 01       		.byte	0x1
  1934 0c3f 45       		.byte	0x45
  1935 0c40 33000000 		.4byte	0x33
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  1985 0ca4 91       		.byte	0x91
  1986 0ca5 5C       		.sleb128 -36
  1987 0ca6 06       		.byte	0x6
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 36
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 36
 
 
  1988 0ca7 26       		.uleb128 0x26
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2042 0016 0B       		.uleb128 0xb
  2043 0017 0B       		.uleb128 0xb
  2044 0018 3E       		.uleb128 0x3e
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 37
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 37
 
 
  2045 0019 0B       		.uleb128 0xb
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2099 004f 01       		.uleb128 0x1
  2100 0050 13       		.uleb128 0x13
  2101 0051 00       		.byte	0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 38
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 38
 
 
  2102 0052 00       		.byte	0
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2156 0088 00       		.byte	0
  2157 0089 0C       		.uleb128 0xc
  2158 008a 13       		.uleb128 0x13
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 39
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 39
 
 
  2159 008b 01       		.byte	0x1
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2213 00c1 03       		.uleb128 0x3
  2214 00c2 0E       		.uleb128 0xe
  2215 00c3 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 40
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 40
 
 
  2216 00c4 0B       		.uleb128 0xb
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2270 00fa 3C       		.uleb128 0x3c
  2271 00fb 19       		.uleb128 0x19
  2272 00fc 00       		.byte	0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 41
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 41
 
 
  2273 00fd 00       		.byte	0
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2327 0133 49       		.uleb128 0x49
  2328 0134 13       		.uleb128 0x13
  2329 0135 2F       		.uleb128 0x2f
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 42
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 42
 
 
  2330 0136 0B       		.uleb128 0xb
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2384 016c 13       		.uleb128 0x13
  2385 016d 00       		.byte	0
  2386 016e 00       		.byte	0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 43
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 43
 
 
  2387 016f 1E       		.uleb128 0x1e
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2441 01a6 34       		.uleb128 0x34
  2442 01a7 00       		.byte	0
  2443 01a8 03       		.uleb128 0x3
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 44
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 44
 
 
  2444 01a9 08       		.uleb128 0x8
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2498 01e3 13       		.uleb128 0x13
  2499 01e4 01       		.uleb128 0x1
  2500 01e5 13       		.uleb128 0x13
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 45
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 45
 
 
  2501 01e6 00       		.byte	0
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2555 0223 3A       		.uleb128 0x3a
  2556 0224 0B       		.uleb128 0xb
  2557 0225 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 46
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 46
 
 
  2558 0226 0B       		.uleb128 0xb
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2612 025c 0E       		.uleb128 0xe
  2613 025d 00       		.byte	0
  2614 025e 00       		.byte	0
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 47
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 47
 
 
  2615 025f 00       		.byte	0
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2669 0084 00000000 		.4byte	0
  2670 0088 00000000 		.4byte	0
  2671              	.LLST0:
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 48
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 48
 
 
  2672 008c 00000000 		.4byte	.LVL0
@@ -2865,8 +2865,8 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2713 0014 00000000 		.4byte	0
  2714              		.section	.debug_line,"",%progbits
  2715              	.Ldebug_line0:
- 2716 0000 91040000 		.section	.debug_str,"MS",%progbits,1
- 2716      02001C04 
+ 2716 0000 15050000 		.section	.debug_str,"MS",%progbits,1
+ 2716      0200A004 
  2716      00000201 
  2716      FB0E0D00 
  2716      01010101 
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2719              	.LASF61:
  2720 000d 72656164 		.ascii	"ready_list_t\000"
  2720      795F6C69 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 49
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 49
 
 
  2720      73745F74 
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2746 00a9 666F726D 		.ascii	"formatted_bytes\000"
  2746      61747465 
  2746      645F6279 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 50
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 50
 
 
  2746      74657300 
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2772      68617200 
  2773              	.LASF148:
  2774 0142 63665F6F 		.ascii	"cf_off_stklimit\000"
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 51
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 51
 
 
  2774      66665F73 
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2804      00
  2805              	.LASF73:
  2806 01d0 76745F70 		.ascii	"vt_prev\000"
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 52
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 52
 
 
  2806      72657600 
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2827      6F6D6974 
  2827      2D667261 
  2828 0304 202D666E 		.ascii	" -fno-strict-aliasing -fstack-protector-all -ffunct"
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 53
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 53
 
 
  2828      6F2D7374 
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2852 03df 6B65726E 		.ascii	"kernel_stats_t\000"
  2852      656C5F73 
  2852      74617473 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 54
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 54
 
 
  2852      5F7400
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2879              	.LASF137:
  2880 0481 63685F7A 		.ascii	"ch_zero\000"
  2880      65726F00 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 55
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 55
 
 
  2881              	.LASF158:
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2908 0521 705F6374 		.ascii	"p_ctx\000"
  2908      7800
  2909              	.LASF109:
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 56
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 56
 
 
  2910 0527 746D5F63 		.ascii	"tm_calibration_t\000"
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2938 05b5 696E7433 		.ascii	"int32_t\000"
  2938      325F7400 
  2939              	.LASF7:
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 57
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 57
 
 
  2940 05bd 756E7369 		.ascii	"unsigned char\000"
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2970 064c 63685F76 		.ascii	"ch_virtual_timer\000"
  2970      69727475 
  2970      616C5F74 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 58
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 58
 
 
  2970      696D6572 
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  2994      00
  2995              	.LASF169:
  2996 06f3 63685265 		.ascii	"chRegNextThread\000"
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 59
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 59
 
 
  2996      674E6578 
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  3025              	.LASF49:
  3026 077e 705F6D73 		.ascii	"p_msg\000"
  3026      6700
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 60
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 60
 
 
  3027              	.LASF76:
@@ -3588,84 +3588,84 @@ ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 1
  3050      65666572 
  3050      656E6365 
  3050      5F7400
- 3051              	.LASF173:
- 3052 081b 433A5C55 		.ascii	"C:\\Users\\i354324\\fakeroot\\code\\libs\\epuck\\TP"
- 3052      73657273 
- 3052      5C693335 
- 3052      34333234 
- 3052      5C66616B 
- 3053 0847 5F6D696E 		.ascii	"_miniprojet\\miniprojet\000"
- 3053      6970726F 
- 3053      6A65745C 
- 3053      6D696E69 
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 61
+ 3051              	.LASF122:
+ 3052 081b 77746F62 		.ascii	"wtobjp\000"
+ 3052      6A7000
+ 3053              	.LASF173:
+ 3054 0822 433A5C55 		.ascii	"C:\\Users\\Steph\\Desktop\\EPFL\\Passerelle_Sem2\\S"
+ 3054      73657273 
+ 3054      5C537465 
+ 3054      70685C44 
+ 3054      65736B74 
+ 3055 084f 7973456D 		.ascii	"ysEmb_TP\\epuck\\TP_miniprojet\\miniprojet\000"
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 61
 
 
- 3053      70726F6A 
- 3054              	.LASF122:
- 3055 085e 77746F62 		.ascii	"wtobjp\000"
- 3055      6A7000
+ 3055      625F5450 
+ 3055      5C657075 
+ 3055      636B5C54 
+ 3055      505F6D69 
  3056              	.LASF79:
- 3057 0865 76745F73 		.ascii	"vt_systime\000"
+ 3057 0877 76745F73 		.ascii	"vt_systime\000"
  3057      79737469 
  3057      6D6500
  3058              	.LASF85:
- 3059 0870 74726163 		.ascii	"trace_buffer\000"
+ 3059 0882 74726163 		.ascii	"trace_buffer\000"
  3059      655F6275 
  3059      66666572 
  3059      00
  3060              	.LASF139:
- 3061 087d 63685F76 		.ascii	"ch_version\000"
+ 3061 088f 63685F76 		.ascii	"ch_version\000"
  3061      65727369 
  3061      6F6E00
  3062              	.LASF151:
- 3063 0888 63665F6F 		.ascii	"cf_off_refs\000"
+ 3063 089a 63665F6F 		.ascii	"cf_off_refs\000"
  3063      66665F72 
  3063      65667300 
  3064              	.LASF117:
- 3065 0894 6D5F6372 		.ascii	"m_crit_thd\000"
+ 3065 08a6 6D5F6372 		.ascii	"m_crit_thd\000"
  3065      69745F74 
  3065      686400
  3066              	.LASF132:
- 3067 089f 6D5F6F77 		.ascii	"m_owner\000"
+ 3067 08b1 6D5F6F77 		.ascii	"m_owner\000"
  3067      6E657200 
  3068              	.LASF101:
- 3069 08a7 73655F77 		.ascii	"se_wtobjp\000"
+ 3069 08b9 73655F77 		.ascii	"se_wtobjp\000"
  3069      746F626A 
  3069      7000
  3070              	.LASF136:
- 3071 08b1 63685F69 		.ascii	"ch_identifier\000"
+ 3071 08c3 63685F69 		.ascii	"ch_identifier\000"
  3071      64656E74 
  3071      69666965 
  3071      7200
  3072              	.LASF75:
- 3073 08bf 76745F66 		.ascii	"vt_func\000"
+ 3073 08d1 76745F66 		.ascii	"vt_func\000"
  3073      756E6300 
  3074              	.LASF60:
- 3075 08c7 63685F74 		.ascii	"ch_threads_queue\000"
+ 3075 08d9 63685F74 		.ascii	"ch_threads_queue\000"
  3075      68726561 
  3075      64735F71 
  3075      75657565 
  3075      00
  3076              	.LASF175:
- 3077 08d8 63687072 		.ascii	"chprintf\000"
+ 3077 08ea 63687072 		.ascii	"chprintf\000"
  3077      696E7466 
  3077      00
  3078              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM
-ARM GAS  C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s 			page 62
+ARM GAS  C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s 			page 62
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 uc_usage.c
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:18     .text.chprintf:00000000 $t
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:25     .text.chprintf:00000000 chprintf
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:82     .text.chprintf:00000030 $d
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:88     .text.printUcUsage:00000000 $t
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:96     .text.printUcUsage:00000000 printUcUsage
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:338    .text.printUcUsage:000001e0 $d
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:350    .bss.sum.7868:00000000 $d
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:354    .bss.sum.7868:00000000 sum.7868
-C:\Users\i354324\AppData\Local\Temp\ccLBLjAg.s:357    .rodata.printUcUsage.str1.4:00000000 $d
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:18     .text.chprintf:00000000 $t
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:25     .text.chprintf:00000000 chprintf
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:82     .text.chprintf:00000030 $d
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:88     .text.printUcUsage:00000000 $t
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:96     .text.printUcUsage:00000000 printUcUsage
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:338    .text.printUcUsage:000001e0 $d
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:350    .bss.sum.7868:00000000 $d
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:354    .bss.sum.7868:00000000 sum.7868
+C:\Users\Steph\AppData\Local\Temp\ccCoFnyk.s:357    .rodata.printUcUsage.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 chvprintf

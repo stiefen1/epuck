@@ -23,6 +23,7 @@ static prox_group_t proximity_sensors;
 static THD_WORKING_AREA(waProximitySensorCompute, 256);
 static THD_FUNCTION(ProximitySensorCompute, arg) {
 
+	(void) arg;
 	// Initalization of the proximity_sensors datas
 	prox_struct_init(IR_DETECTION_LIMIT);
 

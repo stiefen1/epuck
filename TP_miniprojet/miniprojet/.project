@@ -28,13 +28,13 @@
 		<link>
 			<name>e-puck2_main-processor</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/lib/e-puck2_main-processor</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/lib/e-puck2_main-processor</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
 			<name>copy_PARENT</name>
-			<value>$%7BPARENT-3-PROJECT_LOC%7D/SysEmb_TP/epuck</value>
+			<value>file:/C:/Users/Steph/Desktop/EPFL/Passerelle_Sem2/SysEmb_TP/epuck</value>
 		</variable>
 	</variableList>
 </projectDescription>
