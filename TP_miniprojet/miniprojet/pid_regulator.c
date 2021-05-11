@@ -1,3 +1,10 @@
+/*
+ * proximity_sensor.c
+ *
+ *  Created on: 20 avr. 2021
+ *      Author: Stephen
+ */
+
 #include <ch.h>
 #include <hal.h>
 #include <math.h>
@@ -132,6 +139,8 @@ static THD_FUNCTION(PiRegulatorReader, arg) {
 		reg_param->ki = data[2];
 		reg_param->integral = 0.f;
 
+    // Indicateur visuelle sur le robot que les valeures
+    // ont été mise à jour
 		set_front_led(1);
 		chThdSleepMilliseconds(1000);
 		set_front_led(0);
@@ -150,14 +159,11 @@ static THD_FUNCTION(PiRegulatorSender, arg) {
 		set_body_led(1);
 		SendFloatToComputer((BaseSequentialStream *) &SD3, angle_x_tab, NB_SAMPLES);
 		set_body_led(0);
-
-		chThdSleepMilliseconds(1000);
-
 	}
 }
 
 
-void pi_regulator_start(reg_param_t* reg_param){
+void pid_regulator_start(reg_param_t* reg_param){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, reg_param);
 	chThdCreateStatic(waPiRegulatorReader, sizeof(waPiRegulatorReader), NORMALPRIO, PiRegulatorReader, reg_param);
 	chThdCreateStatic(waPiRegulatorSender, sizeof(waPiRegulatorSender), LOWPRIO, PiRegulatorSender, NULL);

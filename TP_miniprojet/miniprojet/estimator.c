@@ -1,3 +1,10 @@
+/*
+ * estimator.c
+ *
+ *  Created on: 21 avr. 2021
+ *      Author: Julien
+ */
+
 #include <ch.h>
 #include <chvt.h>
 #include <hal.h>
@@ -14,15 +21,14 @@
 #include "estimator.h"
 #include "send_data.h"
 
-// Erreur linéaire
-#define LIN_ERR (1.0/30.0)/(1024.0*0.01) 
 #define STANDARD_GRAVITY    9.80665f 
+#define IMU_REFRESH_US 4000.f
+#define SENSOR_FUSION_ALPHA 0.5f
 
 static estimator_t estimator_values;
 
 float get_angle_x()
 {
-  // return estimator_values.angle_x;
   return estimator_values.angle_x;
 }
 
@@ -33,25 +39,25 @@ static THD_FUNCTION(Estimator, arg) {
   imu_msg_t imu_values;
 
   float dt;
-  float alpha = 0.5f;
   float angle_acc;
-
-  uint32_t elapsed_us;
 
   while(true) {
     // Attente des valeurs des prochaines valeurs de l'IMU
     messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
-    // Calcul du temps Ã©coulÃ© depuis la derniÃ¨re itÃ©ration
-    elapsed_us = 4000;
-    // Temps de rafraichissement de l'IMU (mesuré)
 
-    // Calcul de l'angle grÃ¢ce Ã  l'accÃ©lÃ©romÃ¨tre
+    // Calcul de l'angle grace a  l'accelerometre
     angle_acc = atan2f(imu_values.acceleration[1]/STANDARD_GRAVITY, -imu_values.acceleration[2]/STANDARD_GRAVITY);
 
-    // Sensor fusion
-    dt = (float)elapsed_us/1000000.f;
-    estimator_values.angle_x = alpha*(estimator_values.angle_x + dt * imu_values.gyro_rate[0]) + (1.f - alpha) * angle_acc;
+    // Le temps de rafraichissement de l'IMU est quasi-constant (determiné empiriquement) 
+    // donc le temps est directement fixé à une constante
+    dt = IMU_REFRESH_US/1000000.f; // secondes
+
+    // Sensor fusion.
+    //  1. Angle de l'accéleromètre
+    //  2. Angle du gyroscope (Intégration)
+    // Combinaison linéaire
+    estimator_values.angle_x = SENSOR_FUSION_ALPHA*(estimator_values.angle_x + dt * imu_values.gyro_rate[0]) + (1.f - SENSOR_FUSION_ALPHA) * angle_acc;
   }
 }
 

@@ -1,9 +1,12 @@
+/*
+ * estimator.h
+ *
+ *  Created on: 21 avr. 2021
+ *      Author: Julien
+ */
+
 #ifndef ESTIMATOR_H
 #define ESTIMATOR_H
-
-#define RES_250DPS 250.0f
-#define MAX_INT16 32768.0f
-#define GYRO_RAW2DPS (RES_250DPS / MAX_INT16) //250DPS (degrees per second) scale for 32768
 
 typedef struct
 {
@@ -13,4 +16,4 @@ typedef struct
 void estimator_start(void);
 float get_angle_x(void);
 
-#endif
+#endif /* ESTIMATOR_H */

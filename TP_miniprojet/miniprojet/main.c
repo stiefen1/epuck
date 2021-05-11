@@ -21,7 +21,6 @@
 #include "proximity_sensor.h"
 #include "send_data.h"
 
-
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
@@ -68,10 +67,9 @@ int main(void)
   // Start to compute the datas from the IR sensors
   prox_compute_start();
 
-  //stars the threads for the pi regulator
-  // auto_regulator_start(&reg_param);
+  //stars the threads for the pid regulator
   estimator_start();
-  pi_regulator_start(&reg_param);
+  pid_regulator_start(&reg_param);
 
   /* Infinite loop. */
   while (1) {
