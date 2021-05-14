@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef MAIN_BUS_H
+#define MAIN_BUS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,4 +14,4 @@ extern messagebus_t bus;
 }
 #endif
 
-#endif
+#endif /* MAIN_BUS */

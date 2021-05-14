@@ -20,7 +20,7 @@ typedef struct {
 } reg_param_t;
 
 //start the PID regulator thread
-void pid_regulator_start(reg_param_t* reg_param);
+void pid_regulator_start(void);
 
 
 #endif /* PID_REGULATOR_H */

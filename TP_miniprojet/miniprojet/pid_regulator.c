@@ -15,22 +15,23 @@
 #include "sensors/imu.h"
 #include "sensors/proximity.h"
 
-#include "main.h"
 #include "motors.h"
 #include "estimator.h"
 #include "receive_data.h"
 #include "send_data.h"
 #include "proximity_sensor.h"
 #include "leds.h"
+#include "main_bus.h"
 
 static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
 static float angle_x_tab[NB_SAMPLES] = {0};
+static reg_param_t reg_param;
 
 static THD_WORKING_AREA(waPiRegulator, 256);
 static THD_FUNCTION(PiRegulator, arg) {
 
 	chRegSetThreadName(__FUNCTION__);
-	reg_param_t* reg_param = (reg_param_t*)arg;
+  (void)arg;
 
 	systime_t time;
 
@@ -78,24 +79,24 @@ static THD_FUNCTION(PiRegulator, arg) {
 			speed_disturbance = 1000; // Macro DEG2RAD ?
 		}
 
-		reg_param->derivative = -angle_error; // Save the last value of angle error
+		reg_param.derivative = -angle_error; // Save the last value of angle error
 
 		angle_error = get_angle_x() - angle_consigne;
 
-		reg_param->derivative += angle_error; // Compute the derivative
+		reg_param.derivative += angle_error; // Compute the derivative
 
-		reg_param->integral += angle_error; // Compute the integral
+		reg_param.integral += angle_error; // Compute the integral
 
 		// Limit the integral value if the command is saturated
-		if((reg_param->integral * reg_param->ki) > MOTOR_SPEED_LIMIT)
-			reg_param->integral = MOTOR_SPEED_LIMIT / reg_param->ki;
+		if((reg_param.integral * reg_param.ki) > MOTOR_SPEED_LIMIT)
+			reg_param.integral = MOTOR_SPEED_LIMIT / reg_param.ki;
 
-		else if((reg_param->integral * reg_param->ki) < - MOTOR_SPEED_LIMIT)
-			reg_param->integral = - MOTOR_SPEED_LIMIT / reg_param->ki;
+		else if((reg_param.integral * reg_param.ki) < - MOTOR_SPEED_LIMIT)
+			reg_param.integral = - MOTOR_SPEED_LIMIT / reg_param.ki;
 
 
 		// Set speed as the integral of acceleration
-		commande = reg_param->kp * angle_error + reg_param->kd * reg_param->derivative + reg_param->ki * reg_param->integral; // + reg_param->ki * reg_param->integral;
+		commande = reg_param.kp * angle_error + reg_param.kd * reg_param.derivative + reg_param.ki * reg_param.integral;
 
 		// limits the speed to the motors max speed
 		if(abs(commande) > MOTOR_SPEED_LIMIT)
@@ -129,15 +130,19 @@ static THD_FUNCTION(PiRegulator, arg) {
 
 static THD_WORKING_AREA(waPiRegulatorReader, 256);
 static THD_FUNCTION(PiRegulatorReader, arg) {
+
+	chRegSetThreadName(__FUNCTION__);
+  (void) arg;
+
 	float data[3];
-	reg_param_t* reg_param = (reg_param_t*)arg;
 	while(true) {
 		ReceiveFloatFromComputer((BaseSequentialStream *) &SD3, data, 3);
 
-		reg_param->kp = data[0];
-		reg_param->kd = data[1];
-		reg_param->ki = data[2];
-		reg_param->integral = 0.f;
+		reg_param.kp = data[0];
+		reg_param.kd = data[1];
+		reg_param.ki = data[2];
+		// reg_param.consigne = data[3];
+		reg_param.integral = 0.f;
 
     // Indicateur visuelle sur le robot que les valeures
     // ont été mise à jour
@@ -152,7 +157,9 @@ static THD_FUNCTION(PiRegulatorReader, arg) {
 static THD_WORKING_AREA(waPiRegulatorSender, 256);
 static THD_FUNCTION(PiRegulatorSender, arg) {
 
+	chRegSetThreadName(__FUNCTION__);
 	(void) arg;
+
 	while(true) {
 		chBSemWait(&sendToComputer_sem);
 
@@ -163,8 +170,13 @@ static THD_FUNCTION(PiRegulatorSender, arg) {
 }
 
 
-void pid_regulator_start(reg_param_t* reg_param){
-	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, reg_param);
-	chThdCreateStatic(waPiRegulatorReader, sizeof(waPiRegulatorReader), NORMALPRIO, PiRegulatorReader, reg_param);
+void pid_regulator_start(void){
+  reg_param.kp = 0.0;
+  reg_param.kd = 0.0;
+  reg_param.ki = 0.0;
+  reg_param.consigne = 0.0;
+
+	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, NULL);
+	chThdCreateStatic(waPiRegulatorReader, sizeof(waPiRegulatorReader), NORMALPRIO, PiRegulatorReader, NULL);
 	chThdCreateStatic(waPiRegulatorSender, sizeof(waPiRegulatorSender), LOWPRIO, PiRegulatorSender, NULL);
 }

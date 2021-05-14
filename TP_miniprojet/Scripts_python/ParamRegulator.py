@@ -1,3 +1,7 @@
+# Good Parameters
+# Ki : 1.6
+# Kp : 890
+# Kd : 700
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -12,6 +16,7 @@ import time
 from threading import Thread
 
 NB_SAMPLES = 1024
+PORT = "COM13"
 
 def readFloatSerial(port):
 
@@ -97,7 +102,7 @@ def sendFloatSerial(port, data):
 
 
 try:
-  conn = serial.Serial("COM8", timeout=1, baudrate=115200)
+  conn = serial.Serial(PORT, timeout=1, baudrate=115200)
 except Exception as inst:
   print(inst)
   sys.exit(0)
@@ -152,6 +157,9 @@ skd = Slider(axkd, 'kd',0.0, 10000.0, valinit=0.0, valstep=10.0)
 
 axki = plt.axes([0.1, 0.2, 0.65, 0.03], facecolor=axcolor)
 ski = Slider(axki, 'ki',0.0, 10.0, valinit=0.0, valstep=0.1)
+
+axth = plt.axes([0.1, 0.05, 0.65, 0.03], facecolor=axcolor)
+sth = Slider(axth, 'angle', -2, 2, valinit=0.0, valstep=0.1)
 
 
 def send(event):

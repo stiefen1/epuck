@@ -14,8 +14,8 @@
 #include "sensors/proximity.h"
 #include "leds.h"
 
-#include "main.h"
 #include "proximity_sensor.h"
+#include "main_bus.h"
 
 static prox_group_t proximity_sensors;
 

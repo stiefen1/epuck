@@ -17,7 +17,7 @@
 #include "sensors/battery_level.h"
 #include "config_flash_storage.h"
 #include "leds.h"
-#include <main.h>
+#include "main.h"
 #include "motors.h"
 #include <fat.h>
 #include <audio/play_sound_file.h>

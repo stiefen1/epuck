@@ -16,14 +16,17 @@
 #include "sensors/imu.h"
 #include "sensors/proximity.h"
 
-#include "main.h"
 #include "motors.h"
 #include "estimator.h"
+
+#include "main_bus.h"
 #include "send_data.h"
 
 #define STANDARD_GRAVITY    9.80665f 
-#define IMU_REFRESH_US 4000.f
-#define SENSOR_FUSION_ALPHA 0.5f
+// Le temps de rafraichissement de l'IMU est quasi-constant (determiné empiriquement) 
+// donc le temps est directement fixé à une constante pour réduire le nombre d'instructions
+#define IMU_REFRESH_TIME 4.f/1000.f
+#define SENSOR_FUSION_ALPHA 0.7f
 
 static estimator_t estimator_values;
 
@@ -45,24 +48,18 @@ static THD_FUNCTION(Estimator, arg) {
     // Attente des valeurs des prochaines valeurs de l'IMU
     messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
-
     // Calcul de l'angle grace a  l'accelerometre
     angle_acc = atan2f(imu_values.acceleration[1]/STANDARD_GRAVITY, -imu_values.acceleration[2]/STANDARD_GRAVITY);
-
-    // Le temps de rafraichissement de l'IMU est quasi-constant (determiné empiriquement) 
-    // donc le temps est directement fixé à une constante
-    dt = IMU_REFRESH_US/1000000.f; // secondes
 
     // Sensor fusion.
     //  1. Angle de l'accéleromètre
     //  2. Angle du gyroscope (Intégration)
     // Combinaison linéaire
-    estimator_values.angle_x = SENSOR_FUSION_ALPHA*(estimator_values.angle_x + dt * imu_values.gyro_rate[0]) + (1.f - SENSOR_FUSION_ALPHA) * angle_acc;
+    estimator_values.angle_x = SENSOR_FUSION_ALPHA*(estimator_values.angle_x + IMU_REFRESH_TIME * imu_values.gyro_rate[0]) + (1.f - SENSOR_FUSION_ALPHA) * angle_acc;
   }
 }
 
 void estimator_start(void){
-
   messagebus_topic_t *imu_topic;
   imu_topic = messagebus_find_topic_blocking(&bus, "/imu");
 

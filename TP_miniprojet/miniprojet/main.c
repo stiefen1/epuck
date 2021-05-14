@@ -13,8 +13,8 @@
 #include <usbcfg.h>
 #include <motors.h>
 #include <chprintf.h>
+#include "main_bus.h"
 
-#include "main.h"
 #include "compute_imu_data.h"
 #include "pid_regulator.h"
 #include "estimator.h"
@@ -28,28 +28,22 @@ CONDVAR_DECL(bus_condvar);
 
 int main(void)
 {
-  reg_param_t reg_param;
-
-  reg_param.kp = 0.0;
-  reg_param.kd = 0.0;
-  reg_param.ki = 0.0;
-
+  // System init
   halInit();
   chSysInit();
-
   mpu_init();
-  //inits the motors
-  motors_init();
 
-  //starts the serial communication
+  // Motor init
+  motors_init(); 
+
+  // Start the serial communication
   serial_start();
-  //start the USB communication
   usb_start();
 
-  //starts the accelerometer
+  // Start the accelerometer
   imu_start();
 
-  // starts the proximity sensors
+  // Start the proximity sensors
   proximity_start();
 
   // Inits the Inter Process Communication bus
@@ -69,7 +63,7 @@ int main(void)
 
   //stars the threads for the pid regulator
   estimator_start();
-  pid_regulator_start(&reg_param);
+  pid_regulator_start();
 
   /* Infinite loop. */
   while (1) {

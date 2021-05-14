@@ -27,14 +27,14 @@
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.841451799" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1903733348" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1845650896" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1845650896" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" useByScannerDiscovery="false" valueType="undefIncludePath">
 									<listOptionValue builtIn="false" value="C:/Users/Steph/Desktop/EPFL/Passerelle_Sem2/SysEmb_TP/epuck/lib/e-puck2_main-processor/ChibiOS/os/hal/ports/STM32/LLD/FSMCv1"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2093845652" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1956674252" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.99303033" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
-									<listOptionValue builtIn="false" value="C:/Users/Steph/Desktop/EPFL/Passerelle_Sem2/SysEmb_TP/epuck/lib/e-puck2_main-processor/ChibiOS/os/hal/ports/STM32/LLD/FSMCv1"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.99303033" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" useByScannerDiscovery="false" valueType="undefIncludePath">
+									<listOptionValue builtIn="false" value="C:/Users/i354324/fakeroot/code/libs/epuck/TP_miniprojet/miniprojet"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.772641706" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>

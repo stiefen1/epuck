@@ -6,8 +6,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "memory_protection.h"
-#include <main.h>
-
+#include "main.h"
 
 int main(void)
 {
