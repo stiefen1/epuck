@@ -15,7 +15,7 @@ from matplotlib.widgets import Slider, Button
 import time
 from threading import Thread
 
-NB_SAMPLES = 1024
+NB_SAMPLES = 128
 PORT = "COM13"
 
 def readFloatSerial(port):
@@ -111,6 +111,7 @@ print("epuck connected!")
 
 t = np.linspace(0, 1, NB_SAMPLES)
 acc = np.zeros(NB_SAMPLES)
+cmd = np.zeros(NB_SAMPLES)
 
 class Reader(Thread):
     def __init__(self):
@@ -119,13 +120,15 @@ class Reader(Thread):
         self.alive = True
         pass
     def run(self):
-        global acc, conn, ax, t
+        global acc, cmd, conn, t
         global skp, skd
         while self.alive:
             if conn.inWaiting() > 0:
-                acc = np.array(readFloatSerial(conn))
-                print(np.mean(acc))
-                line.set_ydata(acc)
+                received = readFloatSerial(conn)
+                acc = np.array(received[:NB_SAMPLES])
+                cmd = np.array(received[NB_SAMPLES:])
+                line1.set_ydata(acc)
+                line2.set_ydata(cmd)
                 
                 self.updated = True
                 
@@ -141,10 +144,14 @@ reader = Reader()
 reader.start()
 
 
-fig, ax = plt.subplots()
-line, = ax.plot(t, acc)
-ax.set_xlim(0, 1)
-ax.set_ylim(-np.pi/2, np.pi/2)
+fig, (ax1, ax2) = plt.subplots(2, 1)
+line1, = ax1.plot(t, acc)
+line2, = ax2.plot(t, cmd)
+ax1.set_xlim(0, 1)
+ax1.set_ylim(-np.pi/2, np.pi/2)
+
+ax2.set_xlim(0, 1)
+ax2.set_ylim(-1100, 1100)
 
 plt.subplots_adjust(left=0.1, bottom=0.3)
 
@@ -152,11 +159,11 @@ axcolor = 'lightgoldenrodyellow'
 axkp = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
 axkd = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
 
-skp = Slider(axkp, 'kp',0.0, 10000.0, valinit=0.0, valstep=10.0)
-skd = Slider(axkd, 'kd',0.0, 10000.0, valinit=0.0, valstep=10.0)
+skp = Slider(axkp, 'kp',0.0, 10000.0, valinit=890.0, valstep=10.0)
+skd = Slider(axkd, 'kd',0.0, 10000.0, valinit=700.0, valstep=10.0)
 
 axki = plt.axes([0.1, 0.2, 0.65, 0.03], facecolor=axcolor)
-ski = Slider(axki, 'ki',0.0, 10.0, valinit=0.0, valstep=0.1)
+ski = Slider(axki, 'ki',0.0, 10.0, valinit=1.6, valstep=0.1)
 
 axth = plt.axes([0.1, 0.05, 0.65, 0.03], facecolor=axcolor)
 sth = Slider(axth, 'angle', -2, 2, valinit=0.0, valstep=0.1)
@@ -164,7 +171,7 @@ sth = Slider(axth, 'angle', -2, 2, valinit=0.0, valstep=0.1)
 
 def send(event):
     print("send")
-    param = [-skp.val, -skd.val, -ski.val]
+    param = [-skp.val, -skd.val, -ski.val, sth.val]
     sendFloatSerial(conn, param)
     
 

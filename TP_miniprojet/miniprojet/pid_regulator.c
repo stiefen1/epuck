@@ -24,11 +24,11 @@
 #include "main_bus.h"
 
 static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
-static float angle_x_tab[NB_SAMPLES] = {0};
+static float send_tab[2*NB_SAMPLES] = {0};
 static reg_param_t reg_param;
 
-static THD_WORKING_AREA(waPiRegulator, 256);
-static THD_FUNCTION(PiRegulator, arg) {
+static THD_WORKING_AREA(waPIDRegulator, 256);
+static THD_FUNCTION(PIDRegulator, arg) {
 
 	chRegSetThreadName(__FUNCTION__);
   (void)arg;
@@ -58,7 +58,6 @@ static THD_FUNCTION(PiRegulator, arg) {
 		// Apply a speed disturbance depending of the detected side
 		if((back && front) || (!back && !front))
 		{
-			//angle_consigne = 0.0;
 			speed_disturbance = 0;
 			set_led(LED5, 0);
 			set_led(LED1, 0);
@@ -75,13 +74,12 @@ static THD_FUNCTION(PiRegulator, arg) {
 		{
 			set_led(LED1, 1);
 			set_led(LED5, 0);
-			//angle_consigne = DEG2RAD(5);
 			speed_disturbance = 1000; // Macro DEG2RAD ?
 		}
 
 		reg_param.derivative = -angle_error; // Save the last value of angle error
 
-		angle_error = get_angle_x() - angle_consigne;
+		angle_error = get_angle_x() - reg_param.consigne;
 
 		reg_param.derivative += angle_error; // Compute the derivative
 
@@ -99,21 +97,19 @@ static THD_FUNCTION(PiRegulator, arg) {
 		commande = reg_param.kp * angle_error + reg_param.kd * reg_param.derivative + reg_param.ki * reg_param.integral;
 
 		// limits the speed to the motors max speed
-		if(abs(commande) > MOTOR_SPEED_LIMIT)
-		{
-			if(commande < 0)
-				commande = -MOTOR_SPEED_LIMIT;
+		if(commande > MOTOR_SPEED_LIMIT) {
+      commande = MOTOR_SPEED_LIMIT;
+    } else if(commande < -MOTOR_SPEED_LIMIT) {
+      commande = -MOTOR_SPEED_LIMIT;
+    }
 
-			else if(commande > 0)
-				commande = MOTOR_SPEED_LIMIT;
-		}
-
-		right_motor_set_speed(commande + speed_disturbance);
-		left_motor_set_speed(commande + speed_disturbance);
+		right_motor_set_speed(commande);
+		left_motor_set_speed(commande);
 
 		if(i < NB_SAMPLES)
 		{
-			angle_x_tab[i] = angle_error;
+			send_tab[i] = angle_error;
+      send_tab[NB_SAMPLES+i] = commande;
 			i++;
 		}
 
@@ -128,20 +124,20 @@ static THD_FUNCTION(PiRegulator, arg) {
 	}
 }
 
-static THD_WORKING_AREA(waPiRegulatorReader, 256);
-static THD_FUNCTION(PiRegulatorReader, arg) {
+static THD_WORKING_AREA(waPIDRegulatorReader, 256);
+static THD_FUNCTION(PIDRegulatorReader, arg) {
 
 	chRegSetThreadName(__FUNCTION__);
   (void) arg;
 
-	float data[3];
+	float data[4];
 	while(true) {
-		ReceiveFloatFromComputer((BaseSequentialStream *) &SD3, data, 3);
+		ReceiveFloatFromComputer((BaseSequentialStream *) &SD3, data, 4);
 
 		reg_param.kp = data[0];
 		reg_param.kd = data[1];
 		reg_param.ki = data[2];
-		// reg_param.consigne = data[3];
+		reg_param.consigne = data[3];
 		reg_param.integral = 0.f;
 
     // Indicateur visuelle sur le robot que les valeures
@@ -154,8 +150,8 @@ static THD_FUNCTION(PiRegulatorReader, arg) {
 
 
 // Thread to send the angle datas to the computer
-static THD_WORKING_AREA(waPiRegulatorSender, 256);
-static THD_FUNCTION(PiRegulatorSender, arg) {
+static THD_WORKING_AREA(waPIDRegulatorSender, 256);
+static THD_FUNCTION(PIDRegulatorSender, arg) {
 
 	chRegSetThreadName(__FUNCTION__);
 	(void) arg;
@@ -164,7 +160,7 @@ static THD_FUNCTION(PiRegulatorSender, arg) {
 		chBSemWait(&sendToComputer_sem);
 
 		set_body_led(1);
-		SendFloatToComputer((BaseSequentialStream *) &SD3, angle_x_tab, NB_SAMPLES);
+		SendFloatToComputer((BaseSequentialStream *) &SD3, send_tab, 2*NB_SAMPLES);
 		set_body_led(0);
 	}
 }
@@ -176,7 +172,7 @@ void pid_regulator_start(void){
   reg_param.ki = 0.0;
   reg_param.consigne = 0.0;
 
-	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, NULL);
-	chThdCreateStatic(waPiRegulatorReader, sizeof(waPiRegulatorReader), NORMALPRIO, PiRegulatorReader, NULL);
-	chThdCreateStatic(waPiRegulatorSender, sizeof(waPiRegulatorSender), LOWPRIO, PiRegulatorSender, NULL);
+	chThdCreateStatic(waPIDRegulator, sizeof(waPIDRegulator), HIGHPRIO, PIDRegulator, NULL);
+	chThdCreateStatic(waPIDRegulatorReader, sizeof(waPIDRegulatorReader), NORMALPRIO, PIDRegulatorReader, NULL);
+	chThdCreateStatic(waPIDRegulatorSender, sizeof(waPIDRegulatorSender), LOWPRIO, PIDRegulatorSender, NULL);
 }

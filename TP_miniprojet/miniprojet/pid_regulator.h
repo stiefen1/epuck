@@ -8,7 +8,7 @@
 #ifndef PID_REGULATOR_H
 #define PID_REGULATOR_H
 
-#define NB_SAMPLES 1024
+#define NB_SAMPLES 128
 
 typedef struct {
   float kp;
@@ -17,6 +17,7 @@ typedef struct {
   
   float integral;
   float derivative;
+  float consigne;
 } reg_param_t;
 
 //start the PID regulator thread
