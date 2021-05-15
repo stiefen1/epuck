@@ -49,7 +49,7 @@ static THD_FUNCTION(Estimator, arg) {
     messagebus_topic_wait(imu_topic, &imu_values, sizeof(imu_values));
 
     // Calcul de l'angle grace a  l'accelerometre
-    angle_acc = atan2f(imu_values.acceleration[1]/STANDARD_GRAVITY, -imu_values.acceleration[2]/STANDARD_GRAVITY);
+    angle_acc = atan2f(imu_values.acceleration[1], -imu_values.acceleration[2]);
 
     // Sensor fusion.
     //  1. Angle de l'accéleromètre

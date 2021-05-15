@@ -45,7 +45,7 @@ static THD_FUNCTION(PIDRegulator, arg) {
 	int front = 0;
 
 	// speed disturbance imposed by IR sensors
-	int16_t speed_disturbance = 0;
+	float speed_disturbance = 0;
 
 	uint16_t i = 0;
 
@@ -55,10 +55,11 @@ static THD_FUNCTION(PIDRegulator, arg) {
 		back = isDetected(0);
 		front = isDetected(1);
 
+    speed_disturbance = reg_param.speed;
+
 		// Apply a speed disturbance depending of the detected side
 		if((back && front) || (!back && !front))
 		{
-			speed_disturbance = 0;
 			set_led(LED5, 0);
 			set_led(LED1, 0);
 		}
@@ -67,14 +68,14 @@ static THD_FUNCTION(PIDRegulator, arg) {
 		{
 			set_led(LED5, 1);
 			set_led(LED1, 0);
-			speed_disturbance = -1000;
+      reg_param.consigne += 0.1/10.f;
 		}
 
 		else if(isDetected(1))
 		{
 			set_led(LED1, 1);
 			set_led(LED5, 0);
-			speed_disturbance = 1000; // Macro DEG2RAD ?
+      reg_param.consigne -= 0.1/10.f;
 		}
 
 		reg_param.derivative = -angle_error; // Save the last value of angle error
@@ -83,18 +84,18 @@ static THD_FUNCTION(PIDRegulator, arg) {
 
 		reg_param.derivative += angle_error; // Compute the derivative
 
-		reg_param.integral += angle_error; // Compute the integral
+    reg_param.integral += angle_error; // Compute the integral
 
-		// Limit the integral value if the command is saturated
-		if((reg_param.integral * reg_param.ki) > MOTOR_SPEED_LIMIT)
-			reg_param.integral = MOTOR_SPEED_LIMIT / reg_param.ki;
+    // Limit the integral value if the command is saturated
+    if((reg_param.integral * reg_param.ki) > MOTOR_SPEED_LIMIT)
+      reg_param.integral = MOTOR_SPEED_LIMIT / reg_param.ki;
 
-		else if((reg_param.integral * reg_param.ki) < - MOTOR_SPEED_LIMIT)
-			reg_param.integral = - MOTOR_SPEED_LIMIT / reg_param.ki;
+    else if((reg_param.integral * reg_param.ki) < - MOTOR_SPEED_LIMIT)
+      reg_param.integral = - MOTOR_SPEED_LIMIT / reg_param.ki;
 
 
-		// Set speed as the integral of acceleration
-		commande = reg_param.kp * angle_error + reg_param.kd * reg_param.derivative + reg_param.ki * reg_param.integral;
+    // Compute the speed command 
+    commande = reg_param.kp * angle_error + reg_param.kd * reg_param.derivative + reg_param.ki * reg_param.integral;
 
 		// limits the speed to the motors max speed
 		if(commande > MOTOR_SPEED_LIMIT) {
@@ -103,8 +104,8 @@ static THD_FUNCTION(PIDRegulator, arg) {
       commande = -MOTOR_SPEED_LIMIT;
     }
 
-		right_motor_set_speed(commande);
-		left_motor_set_speed(commande);
+		right_motor_set_speed(speed_disturbance + commande);
+		left_motor_set_speed(speed_disturbance + commande);
 
 		if(i < NB_SAMPLES)
 		{
@@ -130,14 +131,15 @@ static THD_FUNCTION(PIDRegulatorReader, arg) {
 	chRegSetThreadName(__FUNCTION__);
   (void) arg;
 
-	float data[4];
+	float data[5];
 	while(true) {
-		ReceiveFloatFromComputer((BaseSequentialStream *) &SD3, data, 4);
+		ReceiveFloatFromComputer((BaseSequentialStream *) &SD3, data, 5);
 
 		reg_param.kp = data[0];
 		reg_param.kd = data[1];
 		reg_param.ki = data[2];
 		reg_param.consigne = data[3];
+		reg_param.speed = data[4];
 		reg_param.integral = 0.f;
 
     // Indicateur visuelle sur le robot que les valeures
@@ -170,7 +172,10 @@ void pid_regulator_start(void){
   reg_param.kp = 0.0;
   reg_param.kd = 0.0;
   reg_param.ki = 0.0;
+  reg_param.integral = 0.0;
+
   reg_param.consigne = 0.0;
+  reg_param.speed = 0.0;
 
 	chThdCreateStatic(waPIDRegulator, sizeof(waPIDRegulator), HIGHPRIO, PIDRegulator, NULL);
 	chThdCreateStatic(waPIDRegulatorReader, sizeof(waPIDRegulatorReader), NORMALPRIO, PIDRegulatorReader, NULL);
