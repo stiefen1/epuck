@@ -28,42 +28,23 @@ static THD_FUNCTION(ProximitySensorCompute, arg) {
 	prox_struct_init(IR_DETECTION_LIMIT);
 
 	while(true) {
+    // FRONT_RIGHT & FRONT_LEFT
+    if(get_calibrated_prox(0) + get_calibrated_prox(7) > proximity_sensors.detection_limit) {
+      // The sum of 2 values needs to be > threshold to consider an object to be detected
+      proximity_sensors.front_detection = 1;
+    } else {
+      proximity_sensors.front_detection = 0;
+    }
 
-		// read the values from the 4 sensors that we use
-		proximity_sensors.prox_value[FRONT_RIGHT] = get_calibrated_prox(0);
-		proximity_sensors.prox_value[FRONT_LEFT] = get_calibrated_prox(7);
-		proximity_sensors.prox_value[BACK_LEFT] = get_calibrated_prox(4);
-		proximity_sensors.prox_value[BACK_RIGHT] = get_calibrated_prox(3);
-
-		// Check the proximity sensors values to detect an object
-		for(int i=0; i<NB_SENSOR_USED; i++)
-		{
-			if(i == 1 || i == 3)
-			{
-				// The sum of 2 values needs to be > threshold to consider an object to be detected
-				if((proximity_sensors.prox_value[i] + proximity_sensors.prox_value[i-1]) > proximity_sensors.detection_limit)
-				{
-					// Check on which side the object has been detected
-					if(i==1)
-						proximity_sensors.front_detection = 1;
-
-					else if(i==3)
-						proximity_sensors.back_detection = 1;
-				}
-				else
-				{
-					// Check on which side nothing has been detected
-					if(i==1)
-						proximity_sensors.front_detection = 0;
-
-					else if(i==3)
-						proximity_sensors.back_detection = 0;
-				}
-			}
-		}
+    // BACK_LEFT & BACK_RIGHT
+    if(get_calibrated_prox(4) + get_calibrated_prox(3) > proximity_sensors.detection_limit) {
+      // The sum of 2 values needs to be > threshold to consider an object to be detected
+      proximity_sensors.back_detection = 1;
+    } else {
+      proximity_sensors.back_detection = 0;
+    }
 
 		chThdSleepMilliseconds(200);
-
   }
 }
 

@@ -13,9 +13,8 @@
 #include <usbcfg.h>
 #include <motors.h>
 #include <chprintf.h>
-#include "main_bus.h"
 
-#include "compute_imu_data.h"
+#include "main_bus.h"
 #include "pid_regulator.h"
 #include "estimator.h"
 #include "proximity_sensor.h"

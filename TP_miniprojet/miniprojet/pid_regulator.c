@@ -34,7 +34,7 @@ static THD_FUNCTION(PIDRegulator, arg) {
 
 	systime_t time;
 
-  // Control
+  // Control variables
 	float commande = 0;
 	float angle_error = 0.f;
   float angle_error_prev = 0.f;
@@ -43,7 +43,7 @@ static THD_FUNCTION(PIDRegulator, arg) {
 	int back = 0;
 	int front = 0;
 
-	while(1){
+	while(1) {
     for(uint16_t i=0; i<NB_SAMPLES; ++i) {
       time = chVTGetSystemTime();
 
@@ -79,7 +79,6 @@ static THD_FUNCTION(PIDRegulator, arg) {
       // Limit the integral value if the command is saturated
       if((reg_param.integral * reg_param.ki) > MOTOR_SPEED_LIMIT)
         reg_param.integral = MOTOR_SPEED_LIMIT / reg_param.ki;
-
       else if((reg_param.integral * reg_param.ki) < - MOTOR_SPEED_LIMIT)
         reg_param.integral = - MOTOR_SPEED_LIMIT / reg_param.ki;
 
@@ -88,11 +87,10 @@ static THD_FUNCTION(PIDRegulator, arg) {
       commande = reg_param.kp * angle_error + reg_param.kd * reg_param.derivative + reg_param.ki * reg_param.integral;
 
       // limits the speed to the motors max speed
-      if(commande > MOTOR_SPEED_LIMIT) {
+      if(commande > MOTOR_SPEED_LIMIT)
         commande = MOTOR_SPEED_LIMIT;
-      } else if(commande < -MOTOR_SPEED_LIMIT) {
+      else if(commande < -MOTOR_SPEED_LIMIT)
         commande = -MOTOR_SPEED_LIMIT;
-      }
 
       right_motor_set_speed(commande);
       left_motor_set_speed(commande);
@@ -102,9 +100,7 @@ static THD_FUNCTION(PIDRegulator, arg) {
 
       //20Hz
       chThdSleepUntilWindowed(time, time + MS2ST(50));
-
     }
-
     chBSemSignal(&sendToComputer_sem);
 	}
 }
