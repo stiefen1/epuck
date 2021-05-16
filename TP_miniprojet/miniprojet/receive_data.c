@@ -5,7 +5,7 @@
  *  Author: Julien
  *
  *  Description:
- *    Fonctions liÃ©s Ã  la rÃ©ception de donnÃ©es du 
+ *    Fonctions liés à la réception de données du
  *    script python.
  */
 

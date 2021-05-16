@@ -5,7 +5,7 @@
  *  Author: Stephen
  *
  *  Description: 
- *    Initialisation des sous-systÃ¨mes du e-puck
+ *    Initialisation des sous-systèmes du e-puck
  *
  */
 #include <stdio.h>

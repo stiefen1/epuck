@@ -5,7 +5,7 @@
  *  Author: Julien
  *
  *  Description:
- *    Fonctions liÃ©s Ã  l'envoi des donnÃ©es au script
+ *    Fonctions liés à l'envoi des données au script
  *    python.
  *
  */

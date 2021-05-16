@@ -5,8 +5,8 @@
 *   Author: Stephen
  *
  *  Description: 
- *    Thread qui gÃ¨re la dÃ©tection d'objet Ã 
- *    proximitÃ© des capteurs avant et arriÃ¨re.
+ *    Thread qui gère la détection d'objet à 
+ *    proximité des capteurs avant et arrière.
  *
  */
 
