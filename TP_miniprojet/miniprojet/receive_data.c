@@ -15,6 +15,7 @@
 
 #include "receive_data.h"
 
+// Fonction reprise tel quel du TP5
 uint16_t ReceiveFloatFromComputer(BaseSequentialStream* in, float* data, uint16_t size){
 
 	volatile uint8_t c1, c2;

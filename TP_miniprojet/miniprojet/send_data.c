@@ -16,6 +16,7 @@
 
 #include "send_data.h"
 
+// Fonction reprise tel quel du TP5
 void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size)
 {
 	chSequentialStreamWrite(out, (uint8_t*)"START", 5);
@@ -23,6 +24,7 @@ void SendFloatToComputer(BaseSequentialStream* out, float* data, uint16_t size)
 	chSequentialStreamWrite(out, (uint8_t*)data, sizeof(float) * size);
 }
 
+// Fonction reprise tel quel du TP5
 void serial_start(void)
 {
 	static SerialConfig ser_cfg = {
