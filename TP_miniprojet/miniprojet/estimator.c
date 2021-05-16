@@ -11,7 +11,6 @@
 #include <math.h>
 #include <usbcfg.h>
 #include <chprintf.h>
-#include <compute_imu_data.h>
 #include <pid_regulator.h>
 #include "sensors/imu.h"
 #include "sensors/proximity.h"

@@ -61,14 +61,14 @@ static THD_FUNCTION(PIDRegulator, arg) {
       {
         set_led(LED5, 1);
         set_led(LED1, 0);
-        reg_param.setpoint += 0.1/10.f;
+        reg_param.setpoint -= 0.1/10.f;
       }
 
       else if(isDetected(1))
       {
         set_led(LED1, 1);
         set_led(LED5, 0);
-        reg_param.setpoint -= 0.1/10.f;
+        reg_param.setpoint += 0.1/10.f;
       }
 
       angle_error_prev = angle_error;
@@ -154,7 +154,7 @@ void pid_regulator_start(void){
   reg_param.kd = 0.0;
   reg_param.ki = 0.0;
   reg_param.integral = 0.0;
-  reg_param.ref = 0.0;
+  reg_param.setpoint = 0.0;
 
 	chThdCreateStatic(waPIDRegulator, sizeof(waPIDRegulator), HIGHPRIO, PIDRegulator, NULL);
 	chThdCreateStatic(waPIDRegulatorReader, sizeof(waPIDRegulatorReader), NORMALPRIO, PIDRegulatorReader, NULL);

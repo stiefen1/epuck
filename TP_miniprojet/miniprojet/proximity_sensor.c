@@ -10,7 +10,6 @@
 #include <math.h>
 #include <usbcfg.h>
 #include <chprintf.h>
-#include <compute_imu_data.h>
 #include "sensors/proximity.h"
 #include "leds.h"
 
