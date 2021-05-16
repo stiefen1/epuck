@@ -1,8 +1,13 @@
 /*
  * estimator.c
- *
+ * 
  *  Created on: 21 avr. 2021
- *      Author: Julien
+ *  Author: Julien
+ *
+ *  Description: 
+ *    Thread qui estime l'angle de l'e-puck à partir
+ *    des mesures du gyroscope et de l'accéléromètre
+ *
  */
 
 #include <ch.h>

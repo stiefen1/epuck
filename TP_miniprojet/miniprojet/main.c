@@ -1,3 +1,13 @@
+/*
+ * main.c
+ * 
+ *  Created on: mars 2021
+ *  Author: Stephen
+ *
+ *  Description: 
+ *    Initialisation des sous-systèmes du e-puck
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

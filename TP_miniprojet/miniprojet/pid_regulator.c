@@ -2,7 +2,14 @@
  * proximity_sensor.c
  *
  *  Created on: 20 avr. 2021
- *      Author: Stephen
+ *  Author: Stephen
+ *
+ *  Description:
+ *    Régulateur PID qui régule l'inclinaison du
+ *    e-puck sur le rail. Comprends aussi les threads
+ *    qui recoivent et envoie les valeurs du régulateur
+ *    au script python.
+ *
  */
 
 #include <ch.h>

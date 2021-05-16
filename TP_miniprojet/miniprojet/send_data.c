@@ -2,7 +2,12 @@
  * send_data.c
  *
  *  Created on: 21 avr. 2021
- *      Author: Julien
+ *  Author: Julien
+ *
+ *  Description:
+ *    Fonctions liés à l'envoi des données au script
+ *    python.
+ *
  */
 
 #include <ch.h>

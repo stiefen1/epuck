@@ -2,7 +2,12 @@
  * proximity_sensor.c
  *
  *  Created on: 1 mai 2021
- *      Author: Stephen
+*   Author: Stephen
+ *
+ *  Description: 
+ *    Thread qui gère la détection d'objet à
+ *    proximité des capteurs avant et arrière.
+ *
  */
 
 #include <ch.h>

@@ -2,7 +2,11 @@
  * receive_data.c
  *
  *  Created on: 21 avr. 2021
- *      Author: Julien
+ *  Author: Julien
+ *
+ *  Description:
+ *    Fonctions liés à la réception de données du 
+ *    script python.
  */
 
 #include <ch.h>
