@@ -176,12 +176,9 @@ ski = Slider(axki, 'ki',0.0, 1000.0, valinit=1.6, valstep=10.0)
 axth = plt.axes([0.15, 0.1, 0.6, 0.03], facecolor=axcolor)
 sth = Slider(axth, 'consigne', -2, 2, valinit=0.0, valstep=0.1)
 
-axsp = plt.axes([0.15, 0.05, 0.6, 0.03], facecolor=axcolor)
-ssp = Slider(axsp, 'speed', -600, 600, valinit=0.0, valstep=0.1)
-
 def send(event):
     print("send")
-    param = [-skp.val, -skd.val, -ski.val, sth.val, ssp.val]
+    param = [-skp.val, -skd.val, -ski.val, sth.val]
     sendFloatSerial(conn, param)
     
 
@@ -200,7 +197,6 @@ def on_close(event):
         conn.close()
 
 fig.canvas.mpl_connect('close_event', on_close)
-
 
 def update_plot():
     global reader, fig

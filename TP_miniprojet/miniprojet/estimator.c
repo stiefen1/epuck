@@ -26,7 +26,9 @@
 // Le temps de rafraichissement de l'IMU est quasi-constant (determiné empiriquement) 
 // donc le temps est directement fixé à une constante pour réduire le nombre d'instructions
 #define IMU_REFRESH_TIME 4.f/1000.f
-#define SENSOR_FUSION_ALPHA 0.7f
+// Coefficient de pondération mesure gyro/accéleromètre
+// Fixé à 0.5 empiriquement
+#define SENSOR_FUSION_ALPHA 0.5f
 
 static estimator_t estimator_values;
 
@@ -55,6 +57,12 @@ static THD_FUNCTION(Estimator, arg) {
     //  1. Angle de l'accéleromètre
     //  2. Angle du gyroscope (Intégration)
     // Combinaison linéaire
+    //
+    // Les mesures seules ont les problèmes suivant:
+    //  Gyroscope: Dérive avec le temps, dû au capteur
+    //  Accéléromètre: Bruit élevé
+    //  La fusion des deux mesures permet d'avoir une mesure précise et stable.
+    // Ref: https://stanford.edu/class/ee267/lectures/lecture9.pdf
     estimator_values.angle_x = SENSOR_FUSION_ALPHA*(estimator_values.angle_x + IMU_REFRESH_TIME * imu_values.gyro_rate[0]) + (1.f - SENSOR_FUSION_ALPHA) * angle_acc;
   }
 }

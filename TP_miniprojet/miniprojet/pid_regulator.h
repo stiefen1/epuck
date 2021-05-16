@@ -18,11 +18,10 @@ typedef struct {
   float integral;
   float derivative;
 
-  float consigne;
-  float speed;
+  float setpoint;
 } reg_param_t;
 
-//start the PID regulator thread
+//start the PID regulator threads
 void pid_regulator_start(void);
 
 
