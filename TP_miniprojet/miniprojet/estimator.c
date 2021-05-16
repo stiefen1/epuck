@@ -47,7 +47,6 @@ static THD_FUNCTION(Estimator, arg) {
   messagebus_topic_t* imu_topic = (messagebus_topic_t*)arg;
   imu_msg_t imu_values;
 
-  float dt;
   float angle_acc;
 
   while(true) {
